@@ -1,9 +1,19 @@
 cmake_minimum_required(VERSION 3.27)
 project(Komodo)
 
-if(APPLE OR WIN32 OR UNIX)
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+  set(KOMODO_PLATFORM_WINDOWS TRUE)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+  set(KOMODO_PLATFORM_MACOS TRUE)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+  set(KOMODO_PLATFORM_LINUX TRUE)
+endif()
+
+if(KOMODO_PLATFORM_WINDOWS OR KOMODO_PLATFORM_MACOS OR KOMODO_PLATFORM_LINUX)
   set(KOMODO_PLATFORM_SUPPORTS_OPENGL TRUE)
 endif()
+
+message(${CMAKE_SYSTEM_NAME})
 
 set(KOMODO_SRC_FILES
   src/komodo/include/komodo.hpp
@@ -30,5 +40,13 @@ add_library(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC src/komodo/include)
 target_include_directories(${PROJECT_NAME} PRIVATE src/komodo/src)
+
+if(KOMODO_PLATFORM_WINDOWS)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE KOMODO_PLATFORM_WINDOWS)
+elseif(KOMODO_PLATFORM_MACOS)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE KOMODO_PLATFORM_MACOS)
+elseif(KOMODO_PLATFORM_LINUX)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE KOMODO_PLATFORM_LINUX)
+endif()
 
 add_subdirectory(example)
