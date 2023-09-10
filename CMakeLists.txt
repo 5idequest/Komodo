@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.27)
 project(Komodo)
 
+if(APPLE OR WIN32 OR UNIX)
+  set(KOMODO_PLATFORM_SUPPORTS_OPENGL TRUE)
+endif()
+
 set(KOMODO_SRC_FILES
   src/komodo/include/komodo.hpp
 )
@@ -11,11 +15,12 @@ set(KOMODO_SRC_INSTANCE_FILES
 )
 source_group("src/komodo/instance" FILES ${KOMODO_SRC_INSTANCE_FILES})
 
-
-set(KOMODO_SRC_OPENGL_INSTANCE_FILES
-  src/komodo/src/backend/opengl/instance/opengl_instance.hpp src/komodo/src/backend/opengl/instance/opengl_instance.cpp
-)
-source_group("src/backend/opengl/instance" FILES ${KOMODO_SRC_OPENGL_INSTANCE_FILES})
+if(KOMODO_PLATFORM_SUPPORTS_OPENGL)
+  set(KOMODO_SRC_OPENGL_INSTANCE_FILES
+    src/komodo/src/backend/opengl/instance/opengl_instance.hpp src/komodo/src/backend/opengl/instance/opengl_instance.cpp
+  )
+  source_group("src/backend/opengl/instance" FILES ${KOMODO_SRC_OPENGL_INSTANCE_FILES})
+endif()
 
 add_library(${PROJECT_NAME}
   ${KOMODO_SRC_FILES}
