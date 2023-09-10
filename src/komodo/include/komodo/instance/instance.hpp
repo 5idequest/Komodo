@@ -2,6 +2,7 @@
 
 namespace Komodo {
 
-void DoSomething();
+class Instance {
+};
 
 }

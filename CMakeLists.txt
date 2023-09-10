@@ -16,12 +16,12 @@ endif()
 message(${CMAKE_SYSTEM_NAME})
 
 set(KOMODO_SRC_FILES
-  src/komodo/include/komodo.hpp
+  src/komodo/include/komodo/komodo.hpp
 )
 source_group("src" FILES ${KOMODO_SRC_FILES})
 
 set(KOMODO_SRC_INSTANCE_FILES
-  src/komodo/src/komodo/instance/instance.hpp src/komodo/src/komodo/instance/instance.cpp
+  src/komodo/include/komodo/instance/instance.hpp src/komodo/src/komodo/instance/instance.cpp
 )
 source_group("src/komodo/instance" FILES ${KOMODO_SRC_INSTANCE_FILES})
 
