@@ -1,3 +1,0 @@
-[submodule "src/lib/glfw"]
-	path = src/lib/glfw
-	url = https://github.com/glfw/glfw
