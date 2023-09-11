@@ -40,6 +40,9 @@ add_library(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
+add_subdirectory(src/lib/glfw)
+target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
+
 if(KOMODO_PLATFORM_WINDOWS)
   target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_PLATFORM_WINDOWS)
 elseif(KOMODO_PLATFORM_MACOS)
