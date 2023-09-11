@@ -10,24 +10,24 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 endif()
 
 if(KOMODO_PLATFORM_WINDOWS OR KOMODO_PLATFORM_MACOS OR KOMODO_PLATFORM_LINUX)
-  set(KOMODO_PLATFORM_SUPPORTS_OPENGL TRUE)
+  set(KOMODO_BACKEND_OPENGL TRUE)
 endif()
 
 message(${CMAKE_SYSTEM_NAME})
 
 set(KOMODO_SRC_FILES
-  src/komodo/include/komodo/komodo.hpp
+  src/komodo/komodo.hpp
 )
 source_group("src" FILES ${KOMODO_SRC_FILES})
 
 set(KOMODO_SRC_INSTANCE_FILES
-  src/komodo/include/komodo/instance/instance.hpp src/komodo/src/komodo/instance/instance.cpp
+  src/komodo/instance/instance.hpp src/komodo/instance/instance.cpp
 )
 source_group("src/komodo/instance" FILES ${KOMODO_SRC_INSTANCE_FILES})
 
-if(KOMODO_PLATFORM_SUPPORTS_OPENGL)
+if(KOMODO_BACKEND_OPENGL)
   set(KOMODO_SRC_OPENGL_INSTANCE_FILES
-    src/komodo/src/backend/opengl/instance/opengl_instance.hpp src/komodo/src/backend/opengl/instance/opengl_instance.cpp
+    src/komodo/backend/opengl/instance/opengl_instance.hpp src/komodo/backend/opengl/instance/opengl_instance.cpp
   )
   source_group("src/backend/opengl/instance" FILES ${KOMODO_SRC_OPENGL_INSTANCE_FILES})
 endif()
@@ -38,15 +38,18 @@ add_library(${PROJECT_NAME}
   ${KOMODO_SRC_OPENGL_INSTANCE_FILES}
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC src/komodo/include)
-target_include_directories(${PROJECT_NAME} PRIVATE src/komodo/src)
+target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 if(KOMODO_PLATFORM_WINDOWS)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE KOMODO_PLATFORM_WINDOWS)
+  target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_PLATFORM_WINDOWS)
 elseif(KOMODO_PLATFORM_MACOS)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE KOMODO_PLATFORM_MACOS)
+  target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_PLATFORM_MACOS)
 elseif(KOMODO_PLATFORM_LINUX)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE KOMODO_PLATFORM_LINUX)
+  target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_PLATFORM_LINUX)
+endif()
+
+if(KOMODO_BACKEND_OPENGL)
+  target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_BACKEND_OPENGL)
 endif()
 
 add_subdirectory(example)
