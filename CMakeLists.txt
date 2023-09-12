@@ -30,11 +30,16 @@ set(KOMODO_SRC_INSTANCE_FILES
 source_group("src/komodo/instance" FILES ${KOMODO_SRC_INSTANCE_FILES})
 
 set(KOMODO_SRC_WINDOW_FILES
-  src/komodo/window/window.hpp
+  src/komodo/window/window.hpp src/komodo/window/window.cpp
 )
 source_group("src/komodo/window" FILES ${KOMODO_SRC_WINDOW_FILES})
 
 if(KOMODO_BACKEND_GLFW)
+  set(KOMODO_SRC_GLFW_INSTANCE_FILES
+    src/komodo/backend/glfw/instance/glfw_instance.hpp src/komodo/backend/glfw/instance/glfw_instance.cpp
+  )
+  source_group("src/backend/glfw/instance" FILES ${KOMODO_SRC_GLFW_INSTANCE_FILES})
+
   set(KOMODO_SRC_GLFW_WINDOW_FILES
     src/komodo/backend/glfw/window/glfw_window.hpp src/komodo/backend/glfw/window/glfw_window.cpp
   )
@@ -59,6 +64,7 @@ add_library(${PROJECT_NAME}
   ${KOMODO_SRC_INSTANCE_FILES}
   ${KOMODO_SRC_WINDOW_FILES}
 
+  ${KOMODO_SRC_GLFW_INSTANCE_FILES}
   ${KOMODO_SRC_GLFW_WINDOW_FILES}
 
   ${KOMODO_SRC_OPENGL_INSTANCE_FILES}

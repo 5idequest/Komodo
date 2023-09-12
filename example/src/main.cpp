@@ -2,4 +2,8 @@
 
 int main() {
   Komodo::OpenGlWindow window;
+  
+  while (window.IsOpen()) {
+    Komodo::PollWindowEvents();
+  }
 }
