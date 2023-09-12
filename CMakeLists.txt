@@ -32,7 +32,7 @@ source_group("src/komodo/instance" FILES ${KOMODO_SRC_INSTANCE_FILES})
 set(KOMODO_SRC_WINDOW_FILES
   src/komodo/window/window.hpp
 )
-source_group("src/komodo/window" FILES ${KOMODO_SRC_INSTANCE_FILES})
+source_group("src/komodo/window" FILES ${KOMODO_SRC_WINDOW_FILES})
 
 if(KOMODO_BACKEND_GLFW)
   set(KOMODO_SRC_GLFW_WINDOW_FILES
