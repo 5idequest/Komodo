@@ -92,6 +92,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC src)
 # Link libraries
 add_subdirectory(src/lib/glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
+add_subdirectory(src/lib/glad)
+target_link_libraries(${PROJECT_NAME} PRIVATE glad)
 
 # Compile defines
 if(KOMODO_PLATFORM_WINDOWS)
