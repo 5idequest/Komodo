@@ -39,6 +39,7 @@ if(KOMODO_BACKEND_GLFW)
   set(KOMODO_SRC_GLFW_WINDOW_FILES
     src/komodo/backend/glfw/window/glfw_window.hpp src/komodo/backend/glfw/window/glfw_window.cpp
     src/komodo/backend/glfw/window/glfw_window_count.hpp src/komodo/backend/glfw/window/glfw_window_count.cpp
+    src/komodo/backend/glfw/window/glfw_window_position.hpp src/komodo/backend/glfw/window/glfw_window_position.cpp
   )
   source_group("src/backend/glfw/window" FILES ${KOMODO_SRC_GLFW_WINDOW_FILES})
 endif()
