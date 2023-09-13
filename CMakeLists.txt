@@ -86,6 +86,9 @@ add_library(${PROJECT_NAME}
   ${KOMODO_SRC_VULKAN_WINDOW_FILES}
 )
 
+# Target C++17
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+
 # Set public include directories
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
