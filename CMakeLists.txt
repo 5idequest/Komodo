@@ -64,6 +64,11 @@ if(KOMODO_BACKEND_OPENGL)
 endif()
 
 if(KOMODO_BACKEND_VULKAN)
+  set(KOMODO_SRC_VULKAN_INSTANCE_FILES
+    src/komodo/backend/vulkan/instance/vulkan_instance.hpp src/komodo/backend/vulkan/instance/vulkan_instance.cpp
+  )
+  source_group("src/backend/vulkan/instance" FILES ${KOMODO_SRC_VULKAN_INSTANCE_FILES})
+
   set(KOMODO_SRC_VULKAN_WINDOW_FILES
     src/komodo/backend/vulkan/window/vulkan_window.hpp src/komodo/backend/vulkan/window/vulkan_window.cpp
     src/komodo/backend/vulkan/window/vulkan_window_title.hpp src/komodo/backend/vulkan/window/vulkan_window_title.cpp
@@ -83,6 +88,7 @@ add_library(${PROJECT_NAME}
   ${KOMODO_SRC_OPENGL_INSTANCE_FILES}
   ${KOMODO_SRC_OPENGL_WINDOW_FILES}
 
+  ${KOMODO_SRC_VULKAN_INSTANCE_FILES}
   ${KOMODO_SRC_VULKAN_WINDOW_FILES}
 )
 
@@ -97,6 +103,11 @@ add_subdirectory(src/lib/glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 add_subdirectory(src/lib/glad)
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)
+
+if(KOMODO_BACKEND_VULKAN)
+  target_link_libraries(${PROJECT_NAME} PRIVATE ${Vulkan_LIBRARY})
+  target_include_directories(${PROJECT_NAME} PUBLIC ${Vulkan_INCLUDE_DIR})
+endif()
 
 # Compile defines
 if(KOMODO_PLATFORM_WINDOWS)
