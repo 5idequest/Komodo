@@ -7,10 +7,12 @@
 
 namespace Komodo {
 
-GlfwWindow::GlfwWindow(const WindowCreateInfo& create_info) {
+GlfwWindow::GlfwWindow() : glfw_window(nullptr) {
   Glfw::IncrementWindowCount();
-  
-  glfw_window = glfwCreateWindow(create_info.width, create_info.height, create_info.title.c_str(), nullptr, nullptr);
+}
+
+void GlfwWindow::CreateGlfwWindow(const WindowCreateInfo& create_info, const std::string& title) {
+  glfw_window = glfwCreateWindow(create_info.width, create_info.height, title.c_str(), nullptr, nullptr);
   
   Glfw::PositionWindow(glfw_window, create_info.position);
 }

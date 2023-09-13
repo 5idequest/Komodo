@@ -9,13 +9,16 @@ namespace Komodo {
 
 class GlfwWindow : public Window {
 public:
-  GlfwWindow(const WindowCreateInfo& create_info);
+  GlfwWindow();
   ~GlfwWindow();
+
+protected:
+  void CreateGlfwWindow(const WindowCreateInfo& create_info, const std::string& title);
   
 public:
   virtual bool IsOpen() const override;
   
-private:
+protected:
   GLFWwindow* glfw_window;
 };
 

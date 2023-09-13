@@ -58,6 +58,7 @@ if(KOMODO_BACKEND_OPENGL)
 
   set(KOMODO_SRC_OPENGL_WINDOW_FILES
     src/komodo/backend/opengl/window/opengl_window.hpp src/komodo/backend/opengl/window/opengl_window.cpp
+    src/komodo/backend/opengl/window/opengl_window_title.hpp src/komodo/backend/opengl/window/opengl_window_title.cpp
   )
   source_group("src/backend/opengl/window" FILES ${KOMODO_SRC_OPENGL_WINDOW_FILES})
 endif()
@@ -65,6 +66,7 @@ endif()
 if(KOMODO_BACKEND_VULKAN)
   set(KOMODO_SRC_VULKAN_WINDOW_FILES
     src/komodo/backend/vulkan/window/vulkan_window.hpp src/komodo/backend/vulkan/window/vulkan_window.cpp
+    src/komodo/backend/vulkan/window/vulkan_window_title.hpp src/komodo/backend/vulkan/window/vulkan_window_title.cpp
   )
   source_group("src/backend/vulkan/window" FILES ${KOMODO_SRC_VULKAN_WINDOW_FILES})
 endif()
@@ -109,6 +111,9 @@ endif()
 if(KOMODO_BACKEND_VULKAN)
   target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_BACKEND_VULKAN)
 endif()
+
+target_compile_definitions(${PROJECT_NAME} PUBLIC $<$<CONFIG:Debug>:KOMODO_BUILD_DEBUG>)
+target_compile_definitions(${PROJECT_NAME} PUBLIC $<$<CONFIG:Release>:KOMODO_BUILD_RELEASE>)
 
 # Add example project
 add_subdirectory(example)

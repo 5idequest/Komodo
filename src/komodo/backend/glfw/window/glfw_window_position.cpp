@@ -7,8 +7,9 @@
 namespace Komodo {
 namespace Glfw {
 
-// Find the monitor that a GLFW window mostly lies on
-// The window can then be positioned relative to that monitor 
+/* Finds the monitor that a GLFW window mostly lies on
+   The window can then be positioned relative to that monitor
+ */
 static GLFWmonitor* FindBestMonitor(GLFWwindow* glfw_window) {
   int monitor_count;
   GLFWmonitor** monitors = glfwGetMonitors(&monitor_count);
@@ -46,6 +47,9 @@ static GLFWmonitor* FindBestMonitor(GLFWwindow* glfw_window) {
   return best_monitor;
 }
 
+/* Finds a monitor by its number (0, 1, 2...)
+   If the monitor doesn't exist, returns the primary monitor
+ */
 static GLFWmonitor* GetMonitor(int monitor) {
   int monitor_count;
   GLFWmonitor** monitors = glfwGetMonitors(&monitor_count);

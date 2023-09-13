@@ -17,7 +17,7 @@ struct WindowPositionInfo {
 };
 
 struct WindowCreateInfo {
-  std::string title = "Komodo";
+  std::string title;
   int width = 1280;
   int height = 720;
   WindowPositionInfo position;
