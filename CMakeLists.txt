@@ -36,13 +36,9 @@ set(KOMODO_SRC_WINDOW_FILES
 source_group("src/komodo/window" FILES ${KOMODO_SRC_WINDOW_FILES})
 
 if(KOMODO_BACKEND_GLFW)
-  set(KOMODO_SRC_GLFW_INSTANCE_FILES
-    src/komodo/backend/glfw/instance/glfw_instance.hpp src/komodo/backend/glfw/instance/glfw_instance.cpp
-  )
-  source_group("src/backend/glfw/instance" FILES ${KOMODO_SRC_GLFW_INSTANCE_FILES})
-
   set(KOMODO_SRC_GLFW_WINDOW_FILES
     src/komodo/backend/glfw/window/glfw_window.hpp src/komodo/backend/glfw/window/glfw_window.cpp
+    src/komodo/backend/glfw/window/glfw_window_count.hpp src/komodo/backend/glfw/window/glfw_window_count.cpp
   )
   source_group("src/backend/glfw/window" FILES ${KOMODO_SRC_GLFW_WINDOW_FILES})
 endif()

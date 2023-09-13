@@ -1,4 +1,4 @@
-#include "glfw_instance.hpp"
+#include "glfw_window_count.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -7,13 +7,13 @@ namespace Glfw {
 
 static int num_glfw_windows = 0;
 
-void IncrementContextCount() {
+void IncrementWindowCount() {
   if (++num_glfw_windows == 1) {
     glfwInit();
   }
 }
 
-void DecrementContextCount() {
+void DecrementWindowCount() {
   if (--num_glfw_windows == 0) {
     glfwTerminate();
   }

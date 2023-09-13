@@ -2,12 +2,12 @@
 
 #include <GLFW/glfw3.h>
 
-#include "komodo/backend/glfw/instance/glfw_instance.hpp"
+#include "komodo/backend/glfw/window/glfw_window_count.hpp"
 
 namespace Komodo {
 
 GlfwWindow::GlfwWindow(const WindowCreateInfo& create_info) {
-  Glfw::IncrementContextCount();
+  Glfw::IncrementWindowCount();
   
   glfw_window = glfwCreateWindow(1280, 720, create_info.title.c_str(), nullptr, nullptr);
 }
@@ -15,7 +15,7 @@ GlfwWindow::GlfwWindow(const WindowCreateInfo& create_info) {
 GlfwWindow::~GlfwWindow() {
   glfwDestroyWindow(glfw_window);
   
-  Glfw::DecrementContextCount();
+  Glfw::DecrementWindowCount();
 }
 
 bool GlfwWindow::IsOpen() const {
