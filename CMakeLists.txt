@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.27)
 project(Komodo)
 
+# Find platform - macOS, Windows or Linux
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
   set(KOMODO_PLATFORM_WINDOWS TRUE)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
@@ -9,16 +10,21 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
   set(KOMODO_PLATFORM_LINUX TRUE)
 endif()
 
+# Find all supported backends for the current platform
 if(KOMODO_PLATFORM_WINDOWS OR KOMODO_PLATFORM_MACOS OR KOMODO_PLATFORM_LINUX)
   set(KOMODO_BACKEND_OPENGL TRUE)
 endif()
 
-if(KOMODO_BACKEND_OPENGL)
+find_package(Vulkan)
+if(Vulkan_FOUND)
+  set(KOMODO_BACKEND_VULKAN TRUE)
+endif()
+
+if(KOMODO_BACKEND_OPENGL OR KOMODO_BACKEND_VULKAN)
   set(KOMODO_BACKEND_GLFW TRUE)
 endif()
 
-message(${CMAKE_SYSTEM_NAME})
-
+# List source files
 set(KOMODO_SRC_FILES
   src/komodo/komodo.hpp
 )
@@ -56,6 +62,13 @@ if(KOMODO_BACKEND_OPENGL)
   source_group("src/backend/opengl/window" FILES ${KOMODO_SRC_OPENGL_WINDOW_FILES})
 endif()
 
+if(KOMODO_BACKEND_VULKAN)
+  set(KOMODO_SRC_VULKAN_WINDOW_FILES
+    src/komodo/backend/vulkan/window/vulkan_window.hpp src/komodo/backend/vulkan/window/vulkan_window.cpp
+  )
+  source_group("src/backend/vulkan/window" FILES ${KOMODO_SRC_VULKAN_WINDOW_FILES})
+endif()
+
 add_library(${PROJECT_NAME}
   ${KOMODO_SRC_FILES}
 
@@ -67,13 +80,18 @@ add_library(${PROJECT_NAME}
 
   ${KOMODO_SRC_OPENGL_INSTANCE_FILES}
   ${KOMODO_SRC_OPENGL_WINDOW_FILES}
+
+  ${KOMODO_SRC_VULKAN_WINDOW_FILES}
 )
 
+# Set public include directories
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
+# Link libraries
 add_subdirectory(src/lib/glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 
+# Compile defines
 if(KOMODO_PLATFORM_WINDOWS)
   target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_PLATFORM_WINDOWS)
 elseif(KOMODO_PLATFORM_MACOS)
@@ -88,5 +106,9 @@ endif()
 if(KOMODO_BACKEND_OPENGL)
   target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_BACKEND_OPENGL)
 endif()
+if(KOMODO_BACKEND_VULKAN)
+  target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_BACKEND_VULKAN)
+endif()
 
+# Add example project
 add_subdirectory(example)

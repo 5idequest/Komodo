@@ -9,3 +9,8 @@
 
 #endif // KOMODO_BACKEND_OPENGL
 
+#ifdef KOMODO_BACKEND_VULKAN
+
+  #include "komodo/backend/vulkan/window/vulkan_window.hpp"
+
+#endif // KOMODO_BACKEND_VULKAN
