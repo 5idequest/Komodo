@@ -31,6 +31,7 @@ source_group("src/komodo/instance" FILES ${KOMODO_SRC_INSTANCE_FILES})
 
 set(KOMODO_SRC_WINDOW_FILES
   src/komodo/window/window.hpp src/komodo/window/window.cpp
+  src/komodo/window/window_create_info.hpp
 )
 source_group("src/komodo/window" FILES ${KOMODO_SRC_WINDOW_FILES})
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "komodo/window/window.hpp"
+#include "komodo/window/window_create_info.hpp"
 
 struct GLFWwindow;
 
@@ -8,7 +9,7 @@ namespace Komodo {
 
 class GlfwWindow : public Window {
 public:
-  GlfwWindow();
+  GlfwWindow(const WindowCreateInfo& create_info);
   ~GlfwWindow();
   
 public:
