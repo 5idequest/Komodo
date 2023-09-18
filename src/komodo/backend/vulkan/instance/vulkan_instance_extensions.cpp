@@ -7,7 +7,7 @@
 namespace Komodo {
 namespace Vulkan {
 
-void FindInstanceExtensions(VkInstanceCreateInfo& instance_info) {    
+void EnableInstanceExtensions(VkInstanceCreateInfo& instance_info) {    
   uint32_t glfw_extension_count = 0;
   const char** glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
   instance_info.enabledExtensionCount = glfw_extension_count;

@@ -5,7 +5,7 @@
 namespace Komodo {
 namespace Vulkan {
 
-void FindInstanceExtensions(VkInstanceCreateInfo& instance_info);
+void EnableInstanceExtensions(VkInstanceCreateInfo& instance_info);
 
 }
 }

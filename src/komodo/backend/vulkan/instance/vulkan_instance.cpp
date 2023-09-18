@@ -18,7 +18,7 @@ VulkanInstance::VulkanInstance() {
   VkInstanceCreateInfo instance_info { };
   instance_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
   instance_info.pApplicationInfo = &app_info;
-  Vulkan::FindInstanceExtensions(instance_info);
+  Vulkan::EnableInstanceExtensions(instance_info);
 
 #ifdef KOMODO_BUILD_DEBUG
   KM_ASSERT(Vulkan::AreAllRequiredValidationLayersSupported());
