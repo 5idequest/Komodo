@@ -6,7 +6,7 @@ namespace Komodo {
 
 class VulkanWindow : public GlfwWindow {
 public:
-  VulkanWindow(const WindowCreateInfo& create_info = {});
+  VulkanWindow(const WindowCreateInfo& create_info = { });
 };
 
 }

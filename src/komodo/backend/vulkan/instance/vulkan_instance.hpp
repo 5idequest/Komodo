@@ -10,7 +10,8 @@ public:
   ~VulkanInstance();
 
 private:
-  VkInstance vkinstance;
+  VkInstance instance;
+  VkAllocationCallbacks* allocator = nullptr;
 };
 
 }

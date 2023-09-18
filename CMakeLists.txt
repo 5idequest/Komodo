@@ -77,6 +77,7 @@ if(KOMODO_BACKEND_VULKAN)
 
   set(KOMODO_SRC_VULKAN_INSTANCE_FILES
     src/komodo/backend/vulkan/instance/vulkan_instance.hpp src/komodo/backend/vulkan/instance/vulkan_instance.cpp
+    src/komodo/backend/vulkan/instance/vulkan_instance_extensions.hpp src/komodo/backend/vulkan/instance/vulkan_instance_extensions.cpp
   )
   source_group("src/backend/vulkan/instance" FILES ${KOMODO_SRC_VULKAN_INSTANCE_FILES})
 
@@ -89,7 +90,7 @@ endif()
 
 add_library(${PROJECT_NAME}
   ${KOMODO_SRC_FILES}
-  
+
   ${KOMODO_SRC_DEBUG_FILES}
   ${KOMODO_SRC_INSTANCE_FILES}
   ${KOMODO_SRC_WINDOW_FILES}
