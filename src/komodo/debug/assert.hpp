@@ -4,11 +4,21 @@
 
   #include "komodo/debug/exception.hpp"
 
-  #define KM_ASSERT(x) do { \
+  #define KM_ASSERT_WITH_MSG(x, what) do { \
     if (!(x)) { \
-      throw Exception("Assert failed!"); \
+      throw Exception(what); \
     } \
   } while(0)
+
+  #define KM_ASSERT_WITHOUT_MSG(x, what) KM_ASSERT_WITH_MSG(x, "Assert failed!")
+
+  #define KM_ASSERT_MACRO_CHOOSER(x, A, B, FUNC) FUNC
+  
+
+  #define KM_ASSERT(...) KM_ASSERT_MACRO_CHOOSER(, ##__VA_ARGS__,\
+                                                KM_ASSERT_WITH_MSG(__VA_ARGS__), \
+                                                KM_ASSERT_WITHOUT_MSG(__VA_ARGS__) \
+                                                )
 
 #endif // KOMODO_BUILD_DEBUG
 
