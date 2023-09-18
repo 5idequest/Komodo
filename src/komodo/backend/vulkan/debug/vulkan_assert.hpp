@@ -16,6 +16,9 @@
       throw VulkanException(string_VkResult(KOMODO_CONCAT(result, __LINE__))); \
     } \
   } while(0)
-#else
+
+#endif // KOMODO_BUILD_DEBUG
+
+#ifdef KOMODO_BUILD_RELEASE
   #define VK_CALL(x) x
-#endif
+#endif // KOMODO_BUILD_RELEASE
