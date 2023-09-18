@@ -21,7 +21,8 @@ VulkanInstance::VulkanInstance() {
   Vulkan::EnableInstanceExtensions(instance_info);
 
 #ifdef KOMODO_BUILD_DEBUG
-  KM_ASSERT(Vulkan::AreAllRequiredValidationLayersSupported());
+  Vulkan::CheckRequiredValidationLayersSupported();
+  Vulkan::EnableValidationLayers(instance_info);
 #endif
 
   VK_CALL(vkCreateInstance(&instance_info, allocator, &instance));

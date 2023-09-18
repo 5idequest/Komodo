@@ -5,6 +5,8 @@
 
 #include <vulkan/vulkan.h>
 
+#include "komodo/debug/assert.hpp"
+
 namespace Komodo {
 namespace Vulkan {
 
@@ -12,7 +14,7 @@ const static std::vector<const char*> kValidationLayers = {
   "VK_LAYER_KHRONOS_validation"
 };
 
-bool AreAllRequiredValidationLayersSupported() {
+bool CheckRequiredValidationLayersSupported() {
   uint32_t layer_count;
   vkEnumerateInstanceLayerProperties(&layer_count, nullptr);
 
@@ -29,11 +31,16 @@ bool AreAllRequiredValidationLayersSupported() {
     }
 
     if (!layer_found) {
-      return false;
+      KM_ASSERT(false, "One or more validation layers requested, but not present");
     }
+  }
+
+  return true;
 }
 
-return true;
+void EnableValidationLayers(VkInstanceCreateInfo& instance_info) {
+  instance_info.enabledLayerCount = kValidationLayers.size();
+  instance_info.ppEnabledLayerNames = kValidationLayers.data();
 }
 
 }

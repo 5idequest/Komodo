@@ -2,10 +2,14 @@
 
 #ifdef KOMODO_BUILD_DEBUG
 
+#include <vulkan/vulkan.h>
+
 namespace Komodo {
 namespace Vulkan {
 
-bool AreAllRequiredValidationLayersSupported();
+bool CheckRequiredValidationLayersSupported();
+
+void EnableValidationLayers(VkInstanceCreateInfo& instance_info);
 
 }
 }
