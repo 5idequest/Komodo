@@ -31,6 +31,7 @@ set(KOMODO_SRC_FILES
 source_group("src" FILES ${KOMODO_SRC_FILES})
 
 set(KOMODO_SRC_DEBUG_FILES
+  src/komodo/debug/assert.hpp
   src/komodo/debug/exception.hpp
 )
 source_group("src/komodo/debug" FILES ${KOMODO_SRC_DEBUG_FILES})
@@ -45,6 +46,11 @@ set(KOMODO_SRC_WINDOW_FILES
   src/komodo/window/window_create_info.hpp
 )
 source_group("src/komodo/window" FILES ${KOMODO_SRC_WINDOW_FILES})
+
+set(KOMODO_SRC_UTILS_FILES
+  src/komodo/utils/concat.hpp
+)
+source_group("src/komodo/utils" FILES ${KOMODO_SRC_UTILS_FILES})
 
 if(KOMODO_BACKEND_GLFW)
   set(KOMODO_SRC_GLFW_WINDOW_FILES
@@ -70,8 +76,9 @@ endif()
 
 if(KOMODO_BACKEND_VULKAN)
   set(KOMODO_SRC_VULKAN_DEBUG_FILES
-    src/komodo/backend/vulkan/debug/vulkan_assert.hpp
+    src/komodo/backend/vulkan/debug/vulkan_call.hpp
     src/komodo/backend/vulkan/debug/vulkan_exception.hpp
+    src/komodo/backend/vulkan/debug/vulkan_validation_layers.hpp src/komodo/backend/vulkan/debug/vulkan_validation_layers.cpp
   )
   source_group("src/backend/vulkan/debug" FILES ${KOMODO_SRC_VULKAN_DEBUG_FILES})
 
@@ -94,6 +101,7 @@ add_library(${PROJECT_NAME}
   ${KOMODO_SRC_DEBUG_FILES}
   ${KOMODO_SRC_INSTANCE_FILES}
   ${KOMODO_SRC_WINDOW_FILES}
+  ${KOMODO_SRC_UTILS_FILES}
   
   ${KOMODO_SRC_GLFW_INSTANCE_FILES}
   ${KOMODO_SRC_GLFW_WINDOW_FILES}
