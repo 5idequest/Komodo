@@ -61,5 +61,9 @@ VulkanInstance::~VulkanInstance() {
   Glfw::DecrementInstanceCount();
 }
 
+std::shared_ptr<VulkanWindow> VulkanInstance::CreateWindow(const WindowCreateInfo& window_info) {
+  return std::make_shared<VulkanWindow>(instance, window_info);
+}
+
 }
 

@@ -2,9 +2,9 @@
 
 int main() {
   Komodo::VulkanInstance komodo;
-  Komodo::VulkanWindow window;
+  auto window = komodo.CreateWindow();
   
-  while (window.IsOpen()) {
+  while (window->IsOpen()) {
     Komodo::PollWindowEvents();
   }
 }

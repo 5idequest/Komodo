@@ -7,7 +7,7 @@ namespace Komodo {
 
 class OpenGlWindow : public GlfwWindow {
 public:
-  OpenGlWindow(const WindowCreateInfo& create_info = { });
+  OpenGlWindow(const WindowCreateInfo& create_info);
 };
 
 }
