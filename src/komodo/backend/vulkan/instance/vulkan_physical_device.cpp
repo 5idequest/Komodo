@@ -5,12 +5,19 @@
 
 #include <volk.h>
 
+#include "komodo/backend/vulkan/instance/vulkan_queue_family_indices.hpp"
 #include "komodo/debug/assert.hpp"
 
 namespace Komodo {
 namespace Vulkan {
 
 static int RateDeviceSuitability(VkPhysicalDevice device) {
+  VulkanQueueFamilyIndices queue_families(device);
+
+  if (!queue_families.IsComplete()) {
+    return 0;
+  }
+
   VkPhysicalDeviceProperties device_properties;
   VkPhysicalDeviceFeatures device_features;
   vkGetPhysicalDeviceProperties(device, &device_properties);
