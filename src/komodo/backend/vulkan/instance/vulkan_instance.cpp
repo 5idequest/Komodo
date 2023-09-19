@@ -9,6 +9,7 @@
 #include "komodo/backend/vulkan/instance/vulkan_instance_extensions.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_physical_device.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_queue_family_indices.hpp"
+#include "komodo/backend/vulkan/instance/vulkan_temp_surface.hpp"
 
 namespace Komodo {
 
@@ -44,10 +45,10 @@ VulkanInstance::VulkanInstance() {
   VK_CALL(vkCreateDebugUtilsMessengerEXT(instance.instance, &debug_messenger_info, instance.allocator, &instance.debug_messenger));
 #endif // KOMODO_BUILD_DEBUG
 
-  instance.physical_device = Vulkan::ChoosePhysicalDevice(instance);
-  instance.device = Vulkan::CreateDevice(instance);
-
-  VulkanQueueFamilyIndices queue_families(instance.physical_device);
+  VulkanTempSurface temp_surface(instance);
+  instance.physical_device = Vulkan::ChoosePhysicalDevice(instance, temp_surface);
+  VulkanQueueFamilyIndices queue_families(instance.physical_device, temp_surface);
+  instance.device = Vulkan::CreateDevice(instance, queue_families);
   vkGetDeviceQueue(instance.device, queue_families.graphics_family.value(), 0, &instance.graphics_queue);
 }
 

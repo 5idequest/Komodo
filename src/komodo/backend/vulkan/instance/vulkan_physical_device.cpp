@@ -11,9 +11,8 @@
 namespace Komodo {
 namespace Vulkan {
 
-static int RateDeviceSuitability(VkPhysicalDevice physical_device) {
-  VulkanQueueFamilyIndices queue_families(physical_device);
-
+static int RateDeviceSuitability(VkPhysicalDevice physical_device, VkSurfaceKHR surface) {
+  VulkanQueueFamilyIndices queue_families(physical_device, surface);
   if (!queue_families.IsComplete()) {
     return 0;
   }
@@ -36,7 +35,7 @@ static int RateDeviceSuitability(VkPhysicalDevice physical_device) {
   return score;
 }
 
-VkPhysicalDevice ChoosePhysicalDevice(VulkanInstanceData& instance) {
+VkPhysicalDevice ChoosePhysicalDevice(VulkanInstanceData& instance, VkSurfaceKHR surface) {
   VkPhysicalDevice physical_device = VK_NULL_HANDLE;
   uint32_t device_count = 0;
 
@@ -47,7 +46,7 @@ VkPhysicalDevice ChoosePhysicalDevice(VulkanInstanceData& instance) {
 
   int highest_score = 0;
   for (const auto& device : devices) {
-    int device_score = RateDeviceSuitability(device);
+    int device_score = RateDeviceSuitability(device, surface);
     if (device_score > highest_score) {
       physical_device = device;
       highest_score = device_score;

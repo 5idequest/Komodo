@@ -94,6 +94,7 @@ if(KOMODO_BACKEND_VULKAN)
     src/komodo/backend/vulkan/instance/vulkan_instance_extensions.hpp src/komodo/backend/vulkan/instance/vulkan_instance_extensions.cpp
     src/komodo/backend/vulkan/instance/vulkan_physical_device.hpp src/komodo/backend/vulkan/instance/vulkan_physical_device.cpp
     src/komodo/backend/vulkan/instance/vulkan_queue_family_indices.hpp src/komodo/backend/vulkan/instance/vulkan_queue_family_indices.cpp
+    src/komodo/backend/vulkan/instance/vulkan_temp_surface.hpp src/komodo/backend/vulkan/instance/vulkan_temp_surface.cpp
   )
   source_group("src/backend/vulkan/instance" FILES ${KOMODO_SRC_VULKAN_INSTANCE_FILES})
 
