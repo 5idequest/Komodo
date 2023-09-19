@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "komodo/backend/vulkan/debug/vulkan_call.hpp"
+#include "komodo/backend/vulkan/window/vulkan_swapchain_support.hpp"
 #include "komodo/debug/assert.hpp"
 
 namespace Komodo {
@@ -40,6 +41,12 @@ static int RateDeviceSuitability(VkPhysicalDevice physical_device, VkSurfaceKHR 
 
   // GPU must support rendering to a swapchain
   if (!DeviceSupportsAllRequiredExtensions(physical_device)) {
+    return 0;
+  }
+
+  // Swapchains must support at least one present mode and at least one image format
+  VulkanSwapchainSupportDetails swapchain_support(physical_device, surface);
+  if (!swapchain_support.IsAdequate()) {
     return 0;
   }
 
