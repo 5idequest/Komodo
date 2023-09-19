@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vulkan/vulkan.h>
+#include "komodo/backend/vulkan/instance/vulkan_instance_data.hpp"
 
 namespace Komodo {
 
@@ -10,8 +10,7 @@ public:
   ~VulkanInstance();
 
 private:
-  VkInstance instance;
-  VkAllocationCallbacks* allocator = nullptr;
+  VulkanInstanceData instance;
 };
 
 }

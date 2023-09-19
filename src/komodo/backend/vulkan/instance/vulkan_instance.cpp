@@ -28,11 +28,19 @@ VulkanInstance::VulkanInstance() {
   Vulkan::EnableValidationLayers(instance_info);
 #endif
 
-  VK_CALL(vkCreateInstance(&instance_info, allocator, &instance));
+  VK_CALL(vkCreateInstance(&instance_info, instance.allocator, &instance.instance));
+
+#ifdef KOMODO_BUILD_DEBUG
+  instance.debug_messenger = new VulkanDebugMessenger(instance);
+#endif // KOMODO_BUILD_DEBUG
 }
 
 VulkanInstance::~VulkanInstance() {
-  vkDestroyInstance(instance, allocator);
+#ifdef KOMODO_BUILD_DEBUG
+  delete instance.debug_messenger;
+#endif // KOMODO_BUILD_DEBUG
+
+  vkDestroyInstance(instance.instance, instance.allocator);
 
   Glfw::DecrementInstanceCount();
 }

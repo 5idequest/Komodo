@@ -82,12 +82,14 @@ if(KOMODO_BACKEND_VULKAN)
   set(KOMODO_SRC_VULKAN_DEBUG_FILES
     src/komodo/backend/vulkan/debug/vulkan_call.hpp
     src/komodo/backend/vulkan/debug/vulkan_exception.hpp
+    src/komodo/backend/vulkan/debug/vulkan_debug_messenger.hpp src/komodo/backend/vulkan/debug/vulkan_debug_messenger.cpp
     src/komodo/backend/vulkan/debug/vulkan_validation_layers.hpp src/komodo/backend/vulkan/debug/vulkan_validation_layers.cpp
   )
   source_group("src/backend/vulkan/debug" FILES ${KOMODO_SRC_VULKAN_DEBUG_FILES})
 
   set(KOMODO_SRC_VULKAN_INSTANCE_FILES
     src/komodo/backend/vulkan/instance/vulkan_instance.hpp src/komodo/backend/vulkan/instance/vulkan_instance.cpp
+    src/komodo/backend/vulkan/instance/vulkan_instance_data.hpp
     src/komodo/backend/vulkan/instance/vulkan_instance_extensions.hpp src/komodo/backend/vulkan/instance/vulkan_instance_extensions.cpp
   )
   source_group("src/backend/vulkan/instance" FILES ${KOMODO_SRC_VULKAN_INSTANCE_FILES})
