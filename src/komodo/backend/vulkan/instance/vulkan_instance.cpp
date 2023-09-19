@@ -1,6 +1,7 @@
 #include "vulkan_instance.hpp"
 
 #include "komodo/debug/assert.hpp"
+#include "komodo/backend/glfw/instance/glfw_instance_count.hpp"
 #include "komodo/backend/vulkan/debug/vulkan_call.hpp"
 #include "komodo/backend/vulkan/debug/vulkan_validation_layers.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_instance_extensions.hpp"
@@ -8,6 +9,8 @@
 namespace Komodo {
 
 VulkanInstance::VulkanInstance() {
+  Glfw::IncrementInstanceCount();
+
   VkApplicationInfo app_info { };
   app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   app_info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
@@ -30,6 +33,8 @@ VulkanInstance::VulkanInstance() {
 
 VulkanInstance::~VulkanInstance() {
   vkDestroyInstance(instance, allocator);
+
+  Glfw::DecrementInstanceCount();
 }
 
 }
