@@ -4,11 +4,11 @@
 
 namespace Komodo {
 
-VulkanQueueFamilyIndices::VulkanQueueFamilyIndices(VkPhysicalDevice device) {
+VulkanQueueFamilyIndices::VulkanQueueFamilyIndices(VkPhysicalDevice physical_device) {
   uint32_t queue_family_count = 0;
-  vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, nullptr);
+  vkGetPhysicalDeviceQueueFamilyProperties(physical_device, &queue_family_count, nullptr);
   std::vector<VkQueueFamilyProperties> queue_families(queue_family_count);
-  vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, queue_families.data());
+  vkGetPhysicalDeviceQueueFamilyProperties(physical_device, &queue_family_count, queue_families.data());
 
   for (int i = 0; i < queue_family_count; ++i) {
     if (queue_families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {

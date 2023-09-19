@@ -8,7 +8,7 @@
 namespace Komodo {
 
 struct VulkanQueueFamilyIndices {
-  VulkanQueueFamilyIndices(VkPhysicalDevice device);
+  VulkanQueueFamilyIndices(VkPhysicalDevice physical_device);
 
   bool IsComplete() const;
 

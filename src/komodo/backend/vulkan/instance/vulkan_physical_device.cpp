@@ -11,8 +11,8 @@
 namespace Komodo {
 namespace Vulkan {
 
-static int RateDeviceSuitability(VkPhysicalDevice device) {
-  VulkanQueueFamilyIndices queue_families(device);
+static int RateDeviceSuitability(VkPhysicalDevice physical_device) {
+  VulkanQueueFamilyIndices queue_families(physical_device);
 
   if (!queue_families.IsComplete()) {
     return 0;
@@ -20,8 +20,8 @@ static int RateDeviceSuitability(VkPhysicalDevice device) {
 
   VkPhysicalDeviceProperties device_properties;
   VkPhysicalDeviceFeatures device_features;
-  vkGetPhysicalDeviceProperties(device, &device_properties);
-  vkGetPhysicalDeviceFeatures(device, &device_features);
+  vkGetPhysicalDeviceProperties(physical_device, &device_properties);
+  vkGetPhysicalDeviceFeatures(physical_device, &device_features);
 
   int score = 1;
 
