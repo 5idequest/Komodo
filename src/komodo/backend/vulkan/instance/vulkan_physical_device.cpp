@@ -37,7 +37,7 @@ static int RateDeviceSuitability(VkPhysicalDevice physical_device) {
 }
 
 VkPhysicalDevice ChoosePhysicalDevice(VulkanInstanceData& instance) {
-  instance.physical_device = VK_NULL_HANDLE;
+  VkPhysicalDevice physical_device = VK_NULL_HANDLE;
   uint32_t device_count = 0;
 
   vkEnumeratePhysicalDevices(instance.instance, &device_count, nullptr);
@@ -49,12 +49,13 @@ VkPhysicalDevice ChoosePhysicalDevice(VulkanInstanceData& instance) {
   for (const auto& device : devices) {
     int device_score = RateDeviceSuitability(device);
     if (device_score > highest_score) {
-      instance.physical_device = device;
+      physical_device = device;
       highest_score = device_score;
     }
   }
 
-  KM_ASSERT(instance.physical_device, "Failed to find a suitable GPU");
+  KM_ASSERT(physical_device, "Failed to find a suitable GPU");
+  return physical_device;
 }
 
 }
