@@ -98,6 +98,7 @@ if(KOMODO_BACKEND_VULKAN)
   source_group("src/backend/vulkan/instance" FILES ${KOMODO_SRC_VULKAN_INSTANCE_FILES})
 
   set(KOMODO_SRC_VULKAN_WINDOW_FILES
+    src/komodo/backend/vulkan/window/vulkan_swapchain.hpp src/komodo/backend/vulkan/window/vulkan_swapchain.cpp
     src/komodo/backend/vulkan/window/vulkan_swapchain_support.hpp src/komodo/backend/vulkan/window/vulkan_swapchain_support.cpp
     src/komodo/backend/vulkan/window/vulkan_window.hpp src/komodo/backend/vulkan/window/vulkan_window.cpp
     src/komodo/backend/vulkan/window/vulkan_window_data.hpp
