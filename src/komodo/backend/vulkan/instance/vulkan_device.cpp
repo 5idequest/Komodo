@@ -25,6 +25,7 @@ VkDevice CreateDevice(VulkanInstanceData& instance) {
 
   VkDevice device;
   VK_CALL(vkCreateDevice(instance.physical_device, &device_info, instance.allocator, &device));
+  volkLoadDevice(device);
   return device;
 }
 
