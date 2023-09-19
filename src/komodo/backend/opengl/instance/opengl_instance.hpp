@@ -5,7 +5,9 @@
 namespace Komodo {
 
 class OpenGlInstance : public Instance {
-
+public:
+  OpenGlInstance();
+  ~OpenGlInstance();
 };
 
 }
