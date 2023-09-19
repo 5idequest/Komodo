@@ -1,5 +1,7 @@
 #include "vulkan_validation_layers.hpp"
 
+#ifdef KOMODO_BUILD_DEBUG
+
 #include <cstdint>
 #include <vector>
 
@@ -45,3 +47,5 @@ void EnableValidationLayers(VkInstanceCreateInfo& instance_info) {
 
 }
 }
+
+#endif // KOMODO_BUILD_DEBUG
