@@ -6,6 +6,7 @@
 #include "komodo/backend/vulkan/debug/vulkan_debug_messenger.hpp"
 #include "komodo/backend/vulkan/debug/vulkan_validation_layers.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_instance_extensions.hpp"
+#include "komodo/backend/vulkan/instance/vulkan_physical_device.hpp"
 
 namespace Komodo {
 
@@ -40,6 +41,8 @@ VulkanInstance::VulkanInstance() {
 #ifdef KOMODO_BUILD_DEBUG
   instance.debug_messenger = new VulkanDebugMessenger(instance);
 #endif // KOMODO_BUILD_DEBUG
+
+  Vulkan::ChoosePhysicalDevice(instance);
 }
 
 VulkanInstance::~VulkanInstance() {

@@ -9,6 +9,7 @@ namespace Komodo {
 struct VulkanInstanceData {
   VkInstance instance;
   VkAllocationCallbacks* allocator = nullptr;
+  VkPhysicalDevice physical_device;
 
 #ifdef KOMODO_BUILD_DEBUG
   VulkanDebugMessenger* debug_messenger;
