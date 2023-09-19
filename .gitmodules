@@ -1,3 +1,6 @@
 [submodule "src/lib/glfw"]
 	path = src/lib/glfw
 	url = https://github.com/glfw/glfw
+[submodule "src/lib/volk"]
+	path = src/lib/volk
+	url = https://github.com/zeux/volk

@@ -127,14 +127,19 @@ target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 # Link libraries
-add_subdirectory(src/lib/glfw)
-target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
-add_subdirectory(src/lib/glad)
-target_link_libraries(${PROJECT_NAME} PRIVATE glad)
+if(KOMODO_BACKEND_GLFW)
+  add_subdirectory(src/lib/glfw)
+  target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
+endif()
+
+if(KOMODO_BACKEND_OPENGL)
+  add_subdirectory(src/lib/glad)
+  target_link_libraries(${PROJECT_NAME} PRIVATE glad)
+endif()
 
 if(KOMODO_BACKEND_VULKAN)
-  target_link_libraries(${PROJECT_NAME} PRIVATE ${Vulkan_LIBRARY})
-  target_include_directories(${PROJECT_NAME} PUBLIC ${Vulkan_INCLUDE_DIR})
+  add_subdirectory(src/lib/volk)
+  target_link_libraries(${PROJECT_NAME} PRIVATE volk)
 endif()
 
 # Compile defines
