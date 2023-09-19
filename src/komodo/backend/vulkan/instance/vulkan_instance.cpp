@@ -50,6 +50,7 @@ VulkanInstance::VulkanInstance() {
   VulkanQueueFamilyIndices queue_families(instance.physical_device, temp_surface);
   instance.device = Vulkan::CreateDevice(instance, queue_families);
   vkGetDeviceQueue(instance.device, queue_families.graphics_family.value(), 0, &instance.graphics_queue);
+  vkGetDeviceQueue(instance.device, queue_families.present_family.value(), 0, &instance.present_queue);
 }
 
 VulkanInstance::~VulkanInstance() {
