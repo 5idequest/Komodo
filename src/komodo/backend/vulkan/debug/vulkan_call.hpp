@@ -2,7 +2,7 @@
 
 #ifdef KOMODO_BUILD_DEBUG
 
-  #include <vulkan/vulkan.h>
+  #include <volk.h>
   #include <vulkan/vk_enum_string_helper.h>
 
   #include "komodo/backend/vulkan/debug/vulkan_exception.hpp"

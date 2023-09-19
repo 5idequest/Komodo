@@ -2,7 +2,7 @@
 
 #ifdef KOMODO_BUILD_DEBUG
 
-#include <vulkan/vulkan.h>
+#include <volk.h>
 
 namespace Komodo {
 namespace Vulkan {

@@ -11,6 +11,8 @@ namespace Komodo {
 VulkanInstance::VulkanInstance() {
   Glfw::IncrementInstanceCount();
 
+  volkInitialize();
+
   VkApplicationInfo app_info { };
   app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   app_info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
@@ -29,6 +31,7 @@ VulkanInstance::VulkanInstance() {
 #endif
 
   VK_CALL(vkCreateInstance(&instance_info, instance.allocator, &instance.instance));
+  volkLoadInstance(instance.instance);
 
 #ifdef KOMODO_BUILD_DEBUG
   instance.debug_messenger = new VulkanDebugMessenger(instance);

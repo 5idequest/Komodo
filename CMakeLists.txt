@@ -139,7 +139,7 @@ endif()
 
 if(KOMODO_BACKEND_VULKAN)
   add_subdirectory(src/lib/volk)
-  target_link_libraries(${PROJECT_NAME} PRIVATE volk)
+  target_link_libraries(${PROJECT_NAME} PUBLIC volk)
 endif()
 
 # Compile defines

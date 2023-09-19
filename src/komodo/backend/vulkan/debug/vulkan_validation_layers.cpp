@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <vector>
 
-#include <vulkan/vulkan.h>
+#include <volk.h>
 
 #include "komodo/debug/assert.hpp"
 

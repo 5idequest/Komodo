@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vulkan/vulkan.h>
+#include <volk.h>
 
 #include "komodo/backend/vulkan/debug/vulkan_debug_messenger.hpp"
 
