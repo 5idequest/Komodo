@@ -10,9 +10,10 @@ struct VulkanInstanceData {
   VkInstance instance;
   VkAllocationCallbacks* allocator = nullptr;
   VkPhysicalDevice physical_device;
+  VkDevice device;
 
 #ifdef KOMODO_BUILD_DEBUG
-  VulkanDebugMessenger* debug_messenger;
+  VkDebugUtilsMessengerEXT debug_messenger;
 #endif
 };
 

@@ -36,16 +36,6 @@ VkDebugUtilsMessengerCreateInfoEXT CreateDebugMessengerCreateInfo() {
 }
 
 }
-
-VulkanDebugMessenger::VulkanDebugMessenger(VulkanInstanceData& instance) : instance(instance) {
-  auto debug_messenger_info = Vulkan::CreateDebugMessengerCreateInfo();
-  VK_CALL(vkCreateDebugUtilsMessengerEXT(instance.instance, &debug_messenger_info, instance.allocator, &debug_messenger));
-}
-
-VulkanDebugMessenger::~VulkanDebugMessenger() {
-  vkDestroyDebugUtilsMessengerEXT(instance.instance, debug_messenger, instance.allocator);
-}
-
 }
 
 #endif // KOMODO_BUILD_DEBUG

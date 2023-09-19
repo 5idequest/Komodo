@@ -39,15 +39,15 @@ VulkanInstance::VulkanInstance() {
   volkLoadInstance(instance.instance);
 
 #ifdef KOMODO_BUILD_DEBUG
-  instance.debug_messenger = new VulkanDebugMessenger(instance);
+  VK_CALL(vkCreateDebugUtilsMessengerEXT(instance.instance, &debug_messenger_info, instance.allocator, &instance.debug_messenger));
 #endif // KOMODO_BUILD_DEBUG
 
-  Vulkan::ChoosePhysicalDevice(instance);
+  instance.physical_device = Vulkan::ChoosePhysicalDevice(instance);
 }
 
 VulkanInstance::~VulkanInstance() {
 #ifdef KOMODO_BUILD_DEBUG
-  delete instance.debug_messenger;
+  vkDestroyDebugUtilsMessengerEXT(instance.instance, instance.debug_messenger, instance.allocator);
 #endif // KOMODO_BUILD_DEBUG
 
   vkDestroyInstance(instance.instance, instance.allocator);
