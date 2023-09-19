@@ -99,6 +99,7 @@ if(KOMODO_BACKEND_VULKAN)
 
   set(KOMODO_SRC_VULKAN_WINDOW_FILES
     src/komodo/backend/vulkan/window/vulkan_window.hpp src/komodo/backend/vulkan/window/vulkan_window.cpp
+    src/komodo/backend/vulkan/window/vulkan_window_data.hpp
     src/komodo/backend/vulkan/window/vulkan_window_title.hpp src/komodo/backend/vulkan/window/vulkan_window_title.cpp
   )
   source_group("src/backend/vulkan/window" FILES ${KOMODO_SRC_VULKAN_WINDOW_FILES})
