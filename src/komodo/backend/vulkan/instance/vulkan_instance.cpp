@@ -7,7 +7,6 @@
 #include "komodo/backend/vulkan/debug/vulkan_validation_layers.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_device.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_instance_extensions.hpp"
-#include "komodo/backend/vulkan/instance/vulkan_physical_device.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_queue_family_indices.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_temp_surface.hpp"
 
