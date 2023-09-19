@@ -11,6 +11,7 @@ struct VulkanInstanceData {
   VkAllocationCallbacks* allocator = nullptr;
   VkPhysicalDevice physical_device;
   VkDevice device;
+  VkQueue graphics_queue;
 
 #ifdef KOMODO_BUILD_DEBUG
   VkDebugUtilsMessengerEXT debug_messenger;

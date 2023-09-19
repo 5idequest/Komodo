@@ -5,8 +5,10 @@
 #include "komodo/backend/vulkan/debug/vulkan_call.hpp"
 #include "komodo/backend/vulkan/debug/vulkan_debug_messenger.hpp"
 #include "komodo/backend/vulkan/debug/vulkan_validation_layers.hpp"
+#include "komodo/backend/vulkan/instance/vulkan_device.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_instance_extensions.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_physical_device.hpp"
+#include "komodo/backend/vulkan/instance/vulkan_queue_family_indices.hpp"
 
 namespace Komodo {
 
@@ -43,13 +45,17 @@ VulkanInstance::VulkanInstance() {
 #endif // KOMODO_BUILD_DEBUG
 
   instance.physical_device = Vulkan::ChoosePhysicalDevice(instance);
+  instance.device = Vulkan::CreateDevice(instance);
+
+  VulkanQueueFamilyIndices queue_families(instance.physical_device);
+  vkGetDeviceQueue(instance.device, queue_families.graphics_family.value(), 0, &instance.graphics_queue);
 }
 
 VulkanInstance::~VulkanInstance() {
+  vkDestroyDevice(instance.device, instance.allocator);
 #ifdef KOMODO_BUILD_DEBUG
   vkDestroyDebugUtilsMessengerEXT(instance.instance, instance.debug_messenger, instance.allocator);
 #endif // KOMODO_BUILD_DEBUG
-
   vkDestroyInstance(instance.instance, instance.allocator);
 
   Glfw::DecrementInstanceCount();
