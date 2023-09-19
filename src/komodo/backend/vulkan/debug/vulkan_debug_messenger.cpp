@@ -15,12 +15,14 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(
     const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
     void* pUserData) {
 
-  fprintf(stderr, pCallbackData->pMessage);
+  fprintf(stderr, "%s\n", pCallbackData->pMessage);
 
   return VK_FALSE;
 }
 
-VulkanDebugMessenger::VulkanDebugMessenger(VulkanInstanceData& instance) : instance(instance) {
+namespace Vulkan {
+
+VkDebugUtilsMessengerCreateInfoEXT CreateDebugMessengerCreateInfo() {
   VkDebugUtilsMessengerCreateInfoEXT debug_messenger_info { };
   debug_messenger_info.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
   debug_messenger_info.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
@@ -30,7 +32,13 @@ VulkanDebugMessenger::VulkanDebugMessenger(VulkanInstanceData& instance) : insta
     | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
     | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
   debug_messenger_info.pfnUserCallback = DebugCallback;
+  return debug_messenger_info;
+}
 
+}
+
+VulkanDebugMessenger::VulkanDebugMessenger(VulkanInstanceData& instance) : instance(instance) {
+  auto debug_messenger_info = Vulkan::CreateDebugMessengerCreateInfo();
   VK_CALL(vkCreateDebugUtilsMessengerEXT(instance.instance, &debug_messenger_info, instance.allocator, &debug_messenger));
 }
 

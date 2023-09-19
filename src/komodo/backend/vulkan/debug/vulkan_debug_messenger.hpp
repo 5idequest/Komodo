@@ -5,6 +5,11 @@
 #include <volk.h>
 
 namespace Komodo {
+namespace Vulkan {
+
+VkDebugUtilsMessengerCreateInfoEXT CreateDebugMessengerCreateInfo();
+
+}
 
 struct VulkanInstanceData;
 
