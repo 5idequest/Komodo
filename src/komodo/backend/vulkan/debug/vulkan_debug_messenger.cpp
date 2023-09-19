@@ -15,7 +15,9 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(
     const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
     void* pUserData) {
 
-  fprintf(stderr, "%s\n", pCallbackData->pMessage);
+  if (messageSeverity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) {
+    fprintf(stderr, "%s\n", pCallbackData->pMessage);
+  }
 
   return VK_FALSE;
 }
