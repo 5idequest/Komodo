@@ -16,6 +16,7 @@ VulkanWindow::VulkanWindow(VulkanInstanceData& instance, const WindowCreateInfo&
 }
 
 VulkanWindow::~VulkanWindow() {
+  vkDestroySwapchainKHR(instance.device, window.swapchain, instance.allocator);
   vkDestroySurfaceKHR(instance.instance, window.surface, instance.allocator);
 }
 
