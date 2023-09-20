@@ -36,11 +36,6 @@ set(KOMODO_SRC_DEBUG_FILES
 )
 source_group("src/komodo/debug" FILES ${KOMODO_SRC_DEBUG_FILES})
 
-set(KOMODO_SRC_INSTANCE_FILES
-  src/komodo/instance/instance.hpp
-)
-source_group("src/komodo/instance" FILES ${KOMODO_SRC_INSTANCE_FILES})
-
 set(KOMODO_SRC_WINDOW_FILES
   src/komodo/window/window.hpp src/komodo/window/window.cpp
   src/komodo/window/window_create_info.hpp
@@ -111,7 +106,6 @@ add_library(${PROJECT_NAME}
   ${KOMODO_SRC_FILES}
 
   ${KOMODO_SRC_DEBUG_FILES}
-  ${KOMODO_SRC_INSTANCE_FILES}
   ${KOMODO_SRC_WINDOW_FILES}
   ${KOMODO_SRC_UTILS_FILES}
   

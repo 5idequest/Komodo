@@ -7,7 +7,7 @@ struct GLFWwindow;
 
 namespace Komodo {
 
-class GlfwWindow : public Window {
+class GlfwWindow {
 public:
   GlfwWindow();
   ~GlfwWindow();
@@ -16,7 +16,7 @@ protected:
   void CreateGlfwWindow(const WindowCreateInfo& create_info, const std::string& title);
   
 public:
-  virtual bool IsOpen() const override;
+  bool IsOpen() const;
   
 protected:
   GLFWwindow* glfw_window;

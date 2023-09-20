@@ -3,11 +3,10 @@
 #include <memory>
 
 #include "komodo/backend/opengl/window/opengl_window.hpp"
-#include "komodo/instance/instance.hpp"
 
 namespace Komodo {
 
-class OpenGlInstance : public Instance {
+class OpenGlInstance {
 public:
   OpenGlInstance();
   ~OpenGlInstance();
