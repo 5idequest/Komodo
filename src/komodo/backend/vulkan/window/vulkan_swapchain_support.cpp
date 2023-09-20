@@ -55,7 +55,7 @@ VkExtent2D VulkanSwapchainSupportDetails::ChooseSwapExtent(GLFWwindow* glfw_wind
     int width, height;
     glfwGetFramebufferSize(glfw_window, &width, &height);
     
-    VkExtent2D actual_extent = { width, height };
+    VkExtent2D actual_extent = { (uint32_t)width, (uint32_t)height };
     
     actual_extent.width = std::clamp(actual_extent.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
     actual_extent.height = std::clamp(actual_extent.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);

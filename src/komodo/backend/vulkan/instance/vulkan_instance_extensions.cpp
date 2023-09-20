@@ -21,6 +21,11 @@ void EnableInstanceExtensions(VkInstanceCreateInfo& instance_info) {
 #ifdef KOMODO_BUILD_DEBUG
     extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 #endif
+    
+#ifdef KOMODO_PLATFORM_MACOS
+    extensions.push_back("VK_KHR_portability_enumeration");
+    extensions.push_back("VK_KHR_get_physical_device_properties2");
+#endif
   }
 
   instance_info.enabledExtensionCount = extensions.size();

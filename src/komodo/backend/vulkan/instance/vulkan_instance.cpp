@@ -28,6 +28,9 @@ VulkanInstance::VulkanInstance() {
   instance_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
   instance_info.pApplicationInfo = &app_info;
   Vulkan::EnableInstanceExtensions(instance_info);
+#ifdef KOMODO_PLATFORM_MACOS
+  instance_info.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
+#endif
 
 #ifdef KOMODO_BUILD_DEBUG
   Vulkan::CheckRequiredValidationLayersSupported();

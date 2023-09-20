@@ -12,7 +12,10 @@ namespace Komodo {
 namespace Vulkan {
 
 const static std::vector<const char*> kDeviceExtensions = {
-  VK_KHR_SWAPCHAIN_EXTENSION_NAME
+  VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+#ifdef KOMODO_PLATFORM_MACOS
+  "VK_KHR_portability_subset"
+#endif
 };
 
 static bool DeviceSupportsAllRequiredExtensions(VkPhysicalDevice physical_device) {
