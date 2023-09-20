@@ -45,9 +45,9 @@ VulkanInstance::VulkanInstance() {
 #endif // KOMODO_BUILD_DEBUG
 
   VulkanTempSurface temp_surface(instance);
-  instance.physical_device = Vulkan::ChoosePhysicalDevice(instance, temp_surface);
+  Vulkan::ChoosePhysicalDevice(instance, temp_surface);
   VulkanQueueFamilyIndices queue_families(instance.physical_device, temp_surface);
-  instance.device = Vulkan::CreateDevice(instance, queue_families);
+  Vulkan::CreateDevice(instance, queue_families);
   vkGetDeviceQueue(instance.device, queue_families.graphics_family.value(), 0, &instance.graphics_queue);
   vkGetDeviceQueue(instance.device, queue_families.present_family.value(), 0, &instance.present_queue);
 }

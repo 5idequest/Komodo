@@ -68,8 +68,8 @@ static int RateDeviceSuitability(VkPhysicalDevice physical_device, VkSurfaceKHR 
   return score;
 }
 
-VkPhysicalDevice ChoosePhysicalDevice(VulkanInstanceData& instance, VkSurfaceKHR surface) {
-  VkPhysicalDevice physical_device = VK_NULL_HANDLE;
+void ChoosePhysicalDevice(VulkanInstanceData& instance, VkSurfaceKHR surface) {
+  instance.physical_device = VK_NULL_HANDLE;
   uint32_t device_count = 0;
 
   vkEnumeratePhysicalDevices(instance.instance, &device_count, nullptr);
@@ -81,16 +81,15 @@ VkPhysicalDevice ChoosePhysicalDevice(VulkanInstanceData& instance, VkSurfaceKHR
   for (const auto& device : devices) {
     int device_score = RateDeviceSuitability(device, surface);
     if (device_score > highest_score) {
-      physical_device = device;
+      instance.physical_device = device;
       highest_score = device_score;
     }
   }
 
-  KM_ASSERT(physical_device, "Failed to find a suitable GPU");
-  return physical_device;
+  KM_ASSERT(instance.physical_device, "Failed to find a suitable GPU");
 }
 
-VkDevice CreateDevice(VulkanInstanceData& instance, const VulkanQueueFamilyIndices& queue_families) {
+void CreateDevice(VulkanInstanceData& instance, const VulkanQueueFamilyIndices& queue_families) {
   std::set<uint32_t> unique_queue_families = {
     queue_families.graphics_family.value(),
     queue_families.present_family.value()
@@ -118,10 +117,8 @@ VkDevice CreateDevice(VulkanInstanceData& instance, const VulkanQueueFamilyIndic
   device_info.enabledExtensionCount = static_cast<uint32_t>(kDeviceExtensions.size());
   device_info.ppEnabledExtensionNames = kDeviceExtensions.data();
 
-  VkDevice device;
-  VK_CALL(vkCreateDevice(instance.physical_device, &device_info, instance.allocator, &device));
-  volkLoadDevice(device);
-  return device;
+  VK_CALL(vkCreateDevice(instance.physical_device, &device_info, instance.allocator, &instance.device));
+  volkLoadDevice(instance.device);
 }
 
 }
