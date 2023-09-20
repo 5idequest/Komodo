@@ -7,7 +7,7 @@
 namespace Komodo {
 namespace Vulkan {
 
-VkSwapchainKHR CreateSwapchain(VulkanInstanceData& instance, VulkanWindowData& window) {
+void CreateWindowSwapchain(VulkanInstanceData& instance, VulkanWindowData& window) {
   VulkanSwapchainSupportDetails swapchain_support(instance.physical_device, window.surface);
 
   VkSurfaceFormatKHR surface_format = swapchain_support.ChooseSurfaceFormat();
@@ -46,9 +46,11 @@ VkSwapchainKHR CreateSwapchain(VulkanInstanceData& instance, VulkanWindowData& w
   swapchain_info.clipped = VK_TRUE;
   swapchain_info.oldSwapchain = VK_NULL_HANDLE;
 
-  VkSwapchainKHR swapchain;
-  VK_CALL(vkCreateSwapchainKHR(instance.device, &swapchain_info, nullptr, &swapchain));
-  return swapchain;
+  VK_CALL(vkCreateSwapchainKHR(instance.device, &swapchain_info, instance.allocator, &window.swapchain));
+
+  vkGetSwapchainImagesKHR(instance.device, window.swapchain, &image_count, nullptr);
+  window.swapchain_images.resize(image_count);
+  vkGetSwapchainImagesKHR(instance.device, window.swapchain, &image_count, window.swapchain_images.data());
 }
 
 }

@@ -7,7 +7,7 @@
 namespace Komodo {
 namespace Vulkan {
 
-VkSwapchainKHR CreateSwapchain(VulkanInstanceData& instance, VulkanWindowData& window);
+void CreateWindowSwapchain(VulkanInstanceData& instance, VulkanWindowData& window);
 
 }
 }

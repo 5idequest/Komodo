@@ -12,7 +12,7 @@ VulkanWindow::VulkanWindow(VulkanInstanceData& instance, const WindowCreateInfo&
   CreateGlfwWindow(create_info, Vulkan::GenerateWindowTitle(create_info.title));
   glfwCreateWindowSurface(instance.instance, glfw_window, instance.allocator, &window.surface);
 
-  window.swapchain = Vulkan::CreateSwapchain(instance, window);
+  Vulkan::CreateWindowSwapchain(instance, window);
 }
 
 VulkanWindow::~VulkanWindow() {
