@@ -51,6 +51,9 @@ void CreateWindowSwapchain(VulkanInstanceData& instance, VulkanWindowData& windo
   vkGetSwapchainImagesKHR(instance.device, window.swapchain, &image_count, nullptr);
   window.swapchain_images.resize(image_count);
   vkGetSwapchainImagesKHR(instance.device, window.swapchain, &image_count, window.swapchain_images.data());
+
+  window.swapchain_image_format = surface_format.format;
+  window.swapchain_extent = extent;
 }
 
 }
