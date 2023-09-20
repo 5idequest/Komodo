@@ -42,6 +42,11 @@ set(KOMODO_SRC_WINDOW_FILES
 )
 source_group("src/komodo/window" FILES ${KOMODO_SRC_WINDOW_FILES})
 
+set(KOMODO_SRC_SHADER_FILES
+  src/komodo/shader/shader_create_info.hpp
+)
+source_group("src/komodo/shader" FILES ${KOMODO_SRC_SHADER_FILES})
+
 set(KOMODO_SRC_UTILS_FILES
   src/komodo/utils/concat.hpp
 )
@@ -100,6 +105,11 @@ if(KOMODO_BACKEND_VULKAN)
     src/komodo/backend/vulkan/window/vulkan_window_title.hpp src/komodo/backend/vulkan/window/vulkan_window_title.cpp
   )
   source_group("src/backend/vulkan/window" FILES ${KOMODO_SRC_VULKAN_WINDOW_FILES})
+
+  set(KOMODO_SRC_VULKAN_SHADER_FILES
+    src/komodo/backend/vulkan/shader/vulkan_shader.hpp src/komodo/backend/vulkan/shader/vulkan_shader.cpp
+  )
+  source_group("src/backend/vulkan/shader" FILES ${KOMODO_SRC_VULKAN_SHADER_FILES})
 endif()
 
 add_library(${PROJECT_NAME}
@@ -107,6 +117,7 @@ add_library(${PROJECT_NAME}
 
   ${KOMODO_SRC_DEBUG_FILES}
   ${KOMODO_SRC_WINDOW_FILES}
+  ${KOMODO_SRC_SHADER_FILES}
   ${KOMODO_SRC_UTILS_FILES}
   
   ${KOMODO_SRC_GLFW_INSTANCE_FILES}
@@ -118,6 +129,7 @@ add_library(${PROJECT_NAME}
   ${KOMODO_SRC_VULKAN_DEBUG_FILES}
   ${KOMODO_SRC_VULKAN_INSTANCE_FILES}
   ${KOMODO_SRC_VULKAN_WINDOW_FILES}
+  ${KOMODO_SRC_VULKAN_SHADER_FILES}
 )
 
 # Target C++17
