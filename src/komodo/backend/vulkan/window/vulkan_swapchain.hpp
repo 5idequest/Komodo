@@ -8,6 +8,7 @@ namespace Komodo {
 namespace Vulkan {
 
 void CreateWindowSwapchain(VulkanInstanceData& instance, VulkanWindowData& window);
+void CreateWindowSwapchainImageViews(VulkanInstanceData& instance, VulkanWindowData& window);
 
 }
 }

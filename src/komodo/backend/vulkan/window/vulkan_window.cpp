@@ -13,9 +13,13 @@ VulkanWindow::VulkanWindow(VulkanInstanceData& instance, const WindowCreateInfo&
   glfwCreateWindowSurface(instance.instance, glfw_window, instance.allocator, &window.surface);
 
   Vulkan::CreateWindowSwapchain(instance, window);
+  Vulkan::CreateWindowSwapchainImageViews(instance, window);
 }
 
 VulkanWindow::~VulkanWindow() {
+  for (auto image_view : window.swapchain_image_views) {
+    vkDestroyImageView(instance.device, image_view, instance.allocator);
+  }
   vkDestroySwapchainKHR(instance.device, window.swapchain, instance.allocator);
   vkDestroySurfaceKHR(instance.instance, window.surface, instance.allocator);
 }
