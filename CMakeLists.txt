@@ -37,7 +37,7 @@ set(KOMODO_SRC_DEBUG_FILES
 source_group("src/komodo/debug" FILES ${KOMODO_SRC_DEBUG_FILES})
 
 set(KOMODO_SRC_INSTANCE_FILES
-  src/komodo/instance/instance.hpp src/komodo/instance/instance.cpp
+  src/komodo/instance/instance.hpp
 )
 source_group("src/komodo/instance" FILES ${KOMODO_SRC_INSTANCE_FILES})
 
