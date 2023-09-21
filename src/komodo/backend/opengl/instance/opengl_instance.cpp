@@ -13,6 +13,15 @@ OpenGlInstance::~OpenGlInstance() {
   Glfw::DecrementInstanceCount();
 }
 
+
+void OpenGlInstance::BeginFrame() {
+  // Clear all windows
+}
+
+void OpenGlInstance::EndFrame() {
+  // Swap buffers
+}
+
 std::shared_ptr<OpenGlWindow> OpenGlInstance::CreateWindow(const WindowCreateInfo& window_info) {
   KM_ASSERT(!is_opengl_loaded, "OpenGl only supports a single window");
   is_opengl_loaded = true;
