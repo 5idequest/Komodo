@@ -4,3 +4,6 @@
 [submodule "src/lib/volk"]
 	path = src/lib/volk
 	url = https://github.com/zeux/volk
+[submodule "src/lib/SPIRV-Cross"]
+	path = src/lib/SPIRV-Cross
+	url = https://github.com/KhronosGroup/SPIRV-Cross
