@@ -83,6 +83,11 @@ if(KOMODO_BACKEND_OPENGL)
     src/komodo/backend/opengl/window/opengl_window_title.hpp src/komodo/backend/opengl/window/opengl_window_title.cpp
   )
   source_group("src/backend/opengl/window" FILES ${KOMODO_SRC_OPENGL_WINDOW_FILES})
+
+  set(KOMODO_SRC_OPENGL_SHADER_FILES
+    src/komodo/backend/opengl/shader/opengl_shader.hpp src/komodo/backend/opengl/shader/opengl_shader.cpp
+  )
+  source_group("src/backend/opengl/shader" FILES ${KOMODO_SRC_OPENGL_SHADER_FILES})
 endif()
 
 if(KOMODO_BACKEND_VULKAN)
@@ -132,6 +137,7 @@ add_library(${PROJECT_NAME}
   
   ${KOMODO_SRC_OPENGL_INSTANCE_FILES}
   ${KOMODO_SRC_OPENGL_WINDOW_FILES}
+  ${KOMODO_SRC_OPENGL_SHADER_FILES}
   
   ${KOMODO_SRC_VULKAN_DEBUG_FILES}
   ${KOMODO_SRC_VULKAN_INSTANCE_FILES}

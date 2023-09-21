@@ -16,4 +16,9 @@ std::shared_ptr<OpenGlWindow> OpenGlInstance::CreateWindow(const WindowCreateInf
   return std::make_shared<OpenGlWindow>(window_info);
 }
 
+
+std::shared_ptr<OpenGlShader> OpenGlInstance::CreateShader(const ShaderCreateInfo& shader_info) {
+  return std::make_shared<OpenGlShader>(shader_info);
+}
+
 }

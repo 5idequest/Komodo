@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "komodo/backend/opengl/window/opengl_window.hpp"
+#include "komodo/backend/opengl/shader/opengl_shader.hpp"
 
 namespace Komodo {
 
@@ -13,6 +14,7 @@ public:
 
 public:
   std::shared_ptr<OpenGlWindow> CreateWindow(const WindowCreateInfo& window_info = { });
+  std::shared_ptr<OpenGlShader> CreateShader(const ShaderCreateInfo& shader_info = { });
 };
 
 }
