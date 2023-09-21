@@ -14,7 +14,10 @@ VulkanWindow::VulkanWindow(VulkanInstanceData* instance, const WindowCreateInfo&
   window = new VulkanWindowData();
 
   glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-  CreateGlfwWindow(create_info, Vulkan::GenerateWindowTitle(create_info.title));
+  CreateGlfwWindow(create_info, create_info.title);
+  if (create_info.title.empty()) {
+    glfwSetWindowTitle(glfw_window, Vulkan::GenerateDefaultWindowTitle().c_str());
+  }
   glfwCreateWindowSurface(instance->instance, glfw_window, instance->allocator, &window->surface);
 
   Vulkan::CreateWindowSwapchain(instance, window);

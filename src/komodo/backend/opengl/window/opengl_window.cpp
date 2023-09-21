@@ -1,5 +1,6 @@
 #include "opengl_window.hpp"
 
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 #include "komodo/backend/opengl/window/opengl_window_title.hpp"
@@ -13,9 +14,14 @@ OpenGlWindow::OpenGlWindow(const WindowCreateInfo& create_info) {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-  CreateGlfwWindow(create_info, OpenGl::GenerateWindowTitle(create_info.title));
+  CreateGlfwWindow(create_info, create_info.title);
 
   glfwMakeContextCurrent(glfw_window);
+  gladLoadGL(glfwGetProcAddress);
+  
+  if (create_info.title.empty()) {
+    glfwSetWindowTitle(glfw_window, OpenGl::GenerateDefaultWindowTitle().c_str());
+  }
 }
 
 }

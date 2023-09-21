@@ -1,21 +1,20 @@
 #include "opengl_window_title.hpp"
 
-#include <GLFW/glfw3.h>
+#include <string>
+
+#include <glad/gl.h>
 
 namespace Komodo {
 namespace OpenGl {
 
-std::string GenerateWindowTitle(const std::string& initial_title) {
-  if (!initial_title.empty()) {
-    return initial_title;
-  }
-  else {
+std::string GenerateDefaultWindowTitle() {
+  std::string version = (char*)glGetString(GL_VERSION);
+
 #ifdef KOMODO_BUILD_DEBUG
-    return "Komodo [OpenGl, Debug]";
+  return std::string("Komodo [OpenGl ") + version + std::string(", Debug]");
 #else
-    return "Komodo [OpenGl]";
+  return std::string("Komodo [OpenGl ") + version + std::string("]");
 #endif
-  }
 }
 
 }
