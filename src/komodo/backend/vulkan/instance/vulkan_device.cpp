@@ -43,6 +43,7 @@ static int RateDeviceSuitability(VkPhysicalDevice physical_device, VkSurfaceKHR 
   }
 
   // GPU must support rendering to a swapchain
+  // Additionally, if on macOS, the GPU must support MoltenVK
   if (!DeviceSupportsAllRequiredExtensions(physical_device)) {
     return 0;
   }
