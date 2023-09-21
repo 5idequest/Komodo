@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <set>
+#include <string>
 #include <vector>
 
 #include "komodo/backend/vulkan/debug/vulkan_call.hpp"

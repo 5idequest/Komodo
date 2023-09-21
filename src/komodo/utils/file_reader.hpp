@@ -1,9 +1,12 @@
 #pragma once
 
+#include <cstdint>
 #include <string>
+#include <vector>
 
 namespace Komodo {
 
-std::string ReadFile(const std::string& path);
+std::string ReadTextFile(const std::string& path);
+std::vector<uint32_t> ReadSpvBinaryFile(const std::string& path);
 
 }

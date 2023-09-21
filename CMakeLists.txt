@@ -15,9 +15,13 @@ if(KOMODO_PLATFORM_WINDOWS OR KOMODO_PLATFORM_MACOS OR KOMODO_PLATFORM_LINUX)
   set(KOMODO_BACKEND_OPENGL TRUE)
 endif()
 
-find_package(Vulkan)
+find_package(Vulkan OPTIONAL_COMPONENTS shaderc_combined)
 if(Vulkan_FOUND)
   set(KOMODO_BACKEND_VULKAN TRUE)
+endif()
+
+if(NOT ${Vulkan_shaderc_combined_LIBRARY} STREQUAL "")
+  set(KOMODO_COMPONENT_SHADERC TRUE)
 endif()
 
 if(KOMODO_BACKEND_OPENGL OR KOMODO_BACKEND_VULKAN)
@@ -157,6 +161,13 @@ if(KOMODO_BACKEND_VULKAN)
   target_link_libraries(${PROJECT_NAME} PUBLIC volk)
 endif()
 
+if(KOMODO_COMPONENT_SHADERC)
+  # Small hack - get debug library name from Vulkan SDK by removing file extension and then appending "d.lib"
+  string(REGEX REPLACE "\\.[^.]*$" "" SHADERC_DEBUG_LIB ${Vulkan_shaderc_combined_LIBRARY})
+  target_link_libraries(${PROJECT_NAME} PRIVATE $<$<CONFIG:Debug>:${SHADERC_DEBUG_LIB}d.lib>)
+  target_link_libraries(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:${Vulkan_shaderc_combined_LIBRARY}>)
+endif()
+
 # Compile defines
 if(KOMODO_PLATFORM_WINDOWS)
   target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_PLATFORM_WINDOWS)
@@ -174,6 +185,10 @@ if(KOMODO_BACKEND_OPENGL)
 endif()
 if(KOMODO_BACKEND_VULKAN)
   target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_BACKEND_VULKAN)
+endif()
+
+if(KOMODO_COMPONENT_SHADERC)
+  target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_COMPONENT_SHADERC)
 endif()
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC $<$<CONFIG:Debug>:KOMODO_BUILD_DEBUG>)
