@@ -14,6 +14,6 @@
 
 #ifdef KOMODO_BUILD_RELEASE
 
-  #define KM_ASSERT(x, what) x
+  #define KM_ASSERT(x, what)
 
 #endif
