@@ -15,13 +15,9 @@ if(KOMODO_PLATFORM_WINDOWS OR KOMODO_PLATFORM_MACOS OR KOMODO_PLATFORM_LINUX)
   set(KOMODO_BACKEND_OPENGL TRUE)
 endif()
 
-find_package(Vulkan OPTIONAL_COMPONENTS shaderc_combined)
+find_package(Vulkan)
 if(Vulkan_FOUND)
   set(KOMODO_BACKEND_VULKAN TRUE)
-endif()
-
-if(NOT ${Vulkan_shaderc_combined_LIBRARY} STREQUAL "")
-  set(KOMODO_COMPONENT_SHADERC TRUE)
 endif()
 
 if(KOMODO_BACKEND_OPENGL OR KOMODO_BACKEND_VULKAN)
@@ -172,6 +168,15 @@ if(KOMODO_BACKEND_METAL)
   target_link_libraries(${PROJECT_NAME} PRIVATE spirv-cross-msl)
 endif()
 
+add_subdirectory(src/lib/SPIRV-Headers)
+add_subdirectory(src/lib/SPIRV-Tools)
+add_subdirectory(src/lib/glslang)
+set(SHADERC_SKIP_TESTS ON)
+set(SHADERC_ENABLE_SHARED_CRT ON)
+add_subdirectory(src/lib/shaderc)
+target_link_libraries(${PROJECT_NAME} PRIVATE shaderc)
+target_include_directories(${PROJECT_NAME} PRIVATE src/lib/shaderc/libshaderc/include/shaderc)
+
 if(KOMODO_BACKEND_GLFW)
   add_subdirectory(src/lib/glfw)
   target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
@@ -185,13 +190,6 @@ endif()
 if(KOMODO_BACKEND_VULKAN)
   add_subdirectory(src/lib/volk)
   target_link_libraries(${PROJECT_NAME} PRIVATE volk)
-endif()
-
-if(KOMODO_COMPONENT_SHADERC)
-  # Small hack - get debug library name from Vulkan SDK by removing file extension and then appending "d.lib"
-  string(REGEX REPLACE "\\.[^.]*$" "" SHADERC_DEBUG_LIB ${Vulkan_shaderc_combined_LIBRARY})
-  target_link_libraries(${PROJECT_NAME} PRIVATE $<$<CONFIG:Debug>:${SHADERC_DEBUG_LIB}d.lib>)
-  target_link_libraries(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:${Vulkan_shaderc_combined_LIBRARY}>)
 endif()
 
 # Compile defines
@@ -211,10 +209,6 @@ if(KOMODO_BACKEND_OPENGL)
 endif()
 if(KOMODO_BACKEND_VULKAN)
   target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_BACKEND_VULKAN)
-endif()
-
-if(KOMODO_COMPONENT_SHADERC)
-  target_compile_definitions(${PROJECT_NAME} PUBLIC KOMODO_COMPONENT_SHADERC)
 endif()
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC $<$<CONFIG:Debug>:KOMODO_BUILD_DEBUG>)

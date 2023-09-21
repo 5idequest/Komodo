@@ -7,3 +7,15 @@
 [submodule "src/lib/SPIRV-Cross"]
 	path = src/lib/SPIRV-Cross
 	url = https://github.com/KhronosGroup/SPIRV-Cross
+[submodule "src/lib/shaderc"]
+	path = src/lib/shaderc
+	url = https://github.com/google/shaderc
+[submodule "src/lib/SPIRV-Tools"]
+	path = src/lib/SPIRV-Tools
+	url = https://github.com/KhronosGroup/SPIRV-Tools
+[submodule "src/lib/SPIRV-Headers"]
+	path = src/lib/SPIRV-Headers
+	url = https://github.com/KhronosGroup/SPIRV-Headers
+[submodule "src/lib/glslang"]
+	path = src/lib/glslang
+	url = https://github.com/KhronosGroup/glslang

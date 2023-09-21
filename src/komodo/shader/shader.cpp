@@ -2,16 +2,15 @@
 
 #include <filesystem>
 
-#ifdef KOMODO_COMPONENT_SHADERC
-  #include <shaderc/shaderc.hpp>
-#endif
+// shaderc is also included with the Vulkan SDK.
+// Make sure not to #include <shaderc/shaderc.hpp> as this will cause
+// mismatched header and cpp/lib files and you will end up with linker errors
+#include <shaderc.hpp>
 
 #include "komodo/debug/assert.hpp"
 #include "komodo/utils/file_reader.hpp"
 
 namespace Komodo {
-
-#ifdef KOMODO_COMPONENT_SHADERC
 
 std::shared_ptr<std::vector<uint32_t>> LoadGlslShaderModule(const std::string& path) {
   std::string glsl_code = ReadTextFile(path);
@@ -27,8 +26,6 @@ std::shared_ptr<std::vector<uint32_t>> LoadGlslShaderModule(const std::string& p
   return spv;
 }
 
-#endif // KOMODO_COMPONENT_SHADERC
-
 std::shared_ptr<std::vector<uint32_t>> LoadSpvShaderModule(const std::string& path) {
   auto spv = std::make_shared<std::vector<uint32_t>>();
   *spv = ReadSpvBinaryFile(path);
@@ -41,12 +38,9 @@ std::shared_ptr<std::vector<uint32_t>> LoadShaderModule(const std::string& path)
   if (extension == ".spv") {
     return LoadSpvShaderModule(path);
   }
-
-#ifdef KOMODO_COMPONENT_SHADERC
   if (extension == ".glsl") {
     return LoadGlslShaderModule(path);
   }
-#endif // KOMODO_COMPONENT_SHADERC
 
   KM_ASSERT(false, "Shader file extension not recognised!");
   return nullptr;
