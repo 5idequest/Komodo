@@ -8,8 +8,8 @@
 namespace Komodo {
 namespace Vulkan {
 
-void ChoosePhysicalDevice(VulkanInstanceData& instance, VkSurfaceKHR surface);
-void CreateDevice(VulkanInstanceData& instance, const VulkanQueueFamilyIndices& queue_families);
+void ChoosePhysicalDevice(VulkanInstanceData* instance, VkSurfaceKHR surface);
+void CreateDevice(VulkanInstanceData* instance, const VulkanQueueFamilyIndices& queue_families);
 
 }
 }

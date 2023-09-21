@@ -9,13 +9,13 @@ namespace Komodo {
 
 class VulkanTempSurface {
 public:
-  VulkanTempSurface(VulkanInstanceData& instance);
+  VulkanTempSurface(VulkanInstanceData* instance);
   ~VulkanTempSurface();
 
 private:
   VkSurfaceKHR surface;
   GLFWwindow* window;
-  VulkanInstanceData& instance;
+  VulkanInstanceData* instance;
 
 public:
   operator VkSurfaceKHR() const;

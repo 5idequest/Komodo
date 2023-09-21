@@ -73,28 +73,28 @@ static int RateDeviceSuitability(VkPhysicalDevice physical_device, VkSurfaceKHR 
   return score;
 }
 
-void ChoosePhysicalDevice(VulkanInstanceData& instance, VkSurfaceKHR surface) {
-  instance.physical_device = VK_NULL_HANDLE;
+void ChoosePhysicalDevice(VulkanInstanceData* instance, VkSurfaceKHR surface) {
+  instance->physical_device = VK_NULL_HANDLE;
   uint32_t device_count = 0;
 
-  vkEnumeratePhysicalDevices(instance.instance, &device_count, nullptr);
+  vkEnumeratePhysicalDevices(instance->instance, &device_count, nullptr);
   KM_ASSERT(device_count, "Failed to find a Vulkan-capable GPU");
   std::vector<VkPhysicalDevice> devices(device_count);
-  vkEnumeratePhysicalDevices(instance.instance, &device_count, devices.data());
+  vkEnumeratePhysicalDevices(instance->instance, &device_count, devices.data());
 
   int highest_score = 0;
   for (const auto& device : devices) {
     int device_score = RateDeviceSuitability(device, surface);
     if (device_score > highest_score) {
-      instance.physical_device = device;
+      instance->physical_device = device;
       highest_score = device_score;
     }
   }
 
-  KM_ASSERT(instance.physical_device, "Failed to find a suitable GPU");
+  KM_ASSERT(instance->physical_device, "Failed to find a suitable GPU");
 }
 
-void CreateDevice(VulkanInstanceData& instance, const VulkanQueueFamilyIndices& queue_families) {
+void CreateDevice(VulkanInstanceData* instance, const VulkanQueueFamilyIndices& queue_families) {
   std::set<uint32_t> unique_queue_families = {
     queue_families.graphics_family.value(),
     queue_families.present_family.value()
@@ -122,8 +122,8 @@ void CreateDevice(VulkanInstanceData& instance, const VulkanQueueFamilyIndices& 
   device_info.enabledExtensionCount = static_cast<uint32_t>(kDeviceExtensions.size());
   device_info.ppEnabledExtensionNames = kDeviceExtensions.data();
 
-  VK_CALL(vkCreateDevice(instance.physical_device, &device_info, instance.allocator, &instance.device));
-  volkLoadDevice(instance.device);
+  VK_CALL(vkCreateDevice(instance->physical_device, &device_info, instance->allocator, &instance->device));
+  volkLoadDevice(instance->device);
 }
 
 }

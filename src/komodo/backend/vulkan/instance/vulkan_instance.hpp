@@ -2,11 +2,12 @@
 
 #include <memory>
 
-#include "komodo/backend/vulkan/instance/vulkan_instance_data.hpp"
 #include "komodo/backend/vulkan/window/vulkan_window.hpp"
 #include "komodo/backend/vulkan/shader/vulkan_shader.hpp"
 
 namespace Komodo {
+
+struct VulkanInstanceData;
 
 class VulkanInstance {
 public:
@@ -14,7 +15,7 @@ public:
   ~VulkanInstance();
 
 private:
-  VulkanInstanceData instance;
+  VulkanInstanceData* instance;
 
 public:
   std::shared_ptr<VulkanWindow> CreateWindow(const WindowCreateInfo& window_info = { });

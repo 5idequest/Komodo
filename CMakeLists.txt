@@ -184,7 +184,7 @@ endif()
 
 if(KOMODO_BACKEND_VULKAN)
   add_subdirectory(src/lib/volk)
-  target_link_libraries(${PROJECT_NAME} PUBLIC volk)
+  target_link_libraries(${PROJECT_NAME} PRIVATE volk)
 endif()
 
 if(KOMODO_COMPONENT_SHADERC)

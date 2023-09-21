@@ -17,6 +17,8 @@ VulkanInstance::VulkanInstance() {
 
   volkInitialize();
 
+  instance = new VulkanInstanceData();
+
   VkApplicationInfo app_info { };
   app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   app_info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
@@ -40,27 +42,29 @@ VulkanInstance::VulkanInstance() {
   instance_info.pNext = &debug_messenger_info;
 #endif
 
-  VK_CALL(vkCreateInstance(&instance_info, instance.allocator, &instance.instance));
-  volkLoadInstance(instance.instance);
+  VK_CALL(vkCreateInstance(&instance_info, instance->allocator, &instance->instance));
+  volkLoadInstance(instance->instance);
 
 #ifdef KOMODO_BUILD_DEBUG
-  VK_CALL(vkCreateDebugUtilsMessengerEXT(instance.instance, &debug_messenger_info, instance.allocator, &instance.debug_messenger));
+  VK_CALL(vkCreateDebugUtilsMessengerEXT(instance->instance, &debug_messenger_info, instance->allocator, &instance->debug_messenger));
 #endif // KOMODO_BUILD_DEBUG
 
   VulkanTempSurface temp_surface(instance);
   Vulkan::ChoosePhysicalDevice(instance, temp_surface);
-  VulkanQueueFamilyIndices queue_families(instance.physical_device, temp_surface);
+  VulkanQueueFamilyIndices queue_families(instance->physical_device, temp_surface);
   Vulkan::CreateDevice(instance, queue_families);
-  vkGetDeviceQueue(instance.device, queue_families.graphics_family.value(), 0, &instance.graphics_queue);
-  vkGetDeviceQueue(instance.device, queue_families.present_family.value(), 0, &instance.present_queue);
+  vkGetDeviceQueue(instance->device, queue_families.graphics_family.value(), 0, &instance->graphics_queue);
+  vkGetDeviceQueue(instance->device, queue_families.present_family.value(), 0, &instance->present_queue);
 }
 
 VulkanInstance::~VulkanInstance() {
-  vkDestroyDevice(instance.device, instance.allocator);
+  vkDestroyDevice(instance->device, instance->allocator);
 #ifdef KOMODO_BUILD_DEBUG
-  vkDestroyDebugUtilsMessengerEXT(instance.instance, instance.debug_messenger, instance.allocator);
+  vkDestroyDebugUtilsMessengerEXT(instance->instance, instance->debug_messenger, instance->allocator);
 #endif // KOMODO_BUILD_DEBUG
-  vkDestroyInstance(instance.instance, instance.allocator);
+  vkDestroyInstance(instance->instance, instance->allocator);
+
+  delete instance;
 
   Glfw::DecrementInstanceCount();
 }

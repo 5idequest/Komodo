@@ -4,15 +4,15 @@
 
 namespace Komodo {
 
-VulkanTempSurface::VulkanTempSurface(VulkanInstanceData& instance) : instance(instance) {
+VulkanTempSurface::VulkanTempSurface(VulkanInstanceData* instance) : instance(instance) {
   glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
   glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
   window = glfwCreateWindow(1, 1, "", nullptr, nullptr);
-  glfwCreateWindowSurface(instance.instance, window, instance.allocator, &surface);
+  glfwCreateWindowSurface(instance->instance, window, instance->allocator, &surface);
 }
 
 VulkanTempSurface::~VulkanTempSurface() {
-  vkDestroySurfaceKHR(instance.instance, surface, instance.allocator);
+  vkDestroySurfaceKHR(instance->instance, surface, instance->allocator);
   glfwDestroyWindow(window);
 }
 
