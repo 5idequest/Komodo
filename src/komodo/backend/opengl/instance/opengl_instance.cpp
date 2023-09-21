@@ -1,6 +1,7 @@
 #include "opengl_instance.hpp"
 
 #include "komodo/backend/glfw/instance/glfw_instance_count.hpp"
+#include "komodo/debug/assert.hpp"
 
 namespace Komodo {
 
@@ -13,6 +14,8 @@ OpenGlInstance::~OpenGlInstance() {
 }
 
 std::shared_ptr<OpenGlWindow> OpenGlInstance::CreateWindow(const WindowCreateInfo& window_info) {
+  KM_ASSERT(!is_opengl_loaded, "OpenGl only supports a single window");
+  is_opengl_loaded = true;
   return std::make_shared<OpenGlWindow>(window_info);
 }
 
