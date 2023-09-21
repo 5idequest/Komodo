@@ -43,12 +43,15 @@ set(KOMODO_SRC_WINDOW_FILES
 source_group("src/komodo/window" FILES ${KOMODO_SRC_WINDOW_FILES})
 
 set(KOMODO_SRC_SHADER_FILES
+  src/komodo/shader/shader.hpp src/komodo/shader/shader.cpp
   src/komodo/shader/shader_create_info.hpp
+  src/komodo/shader/spv_modules.hpp
 )
 source_group("src/komodo/shader" FILES ${KOMODO_SRC_SHADER_FILES})
 
 set(KOMODO_SRC_UTILS_FILES
   src/komodo/utils/concat.hpp
+  src/komodo/utils/file_reader.hpp src/komodo/utils/file_reader.cpp
 )
 source_group("src/komodo/utils" FILES ${KOMODO_SRC_UTILS_FILES})
 
