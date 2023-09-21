@@ -18,6 +18,9 @@ private:
   VulkanInstanceData* instance;
 
 public:
+  void BeginFrame();
+  void EndFrame();
+
   std::shared_ptr<VulkanWindow> CreateWindow(const WindowCreateInfo& window_info = { });
   std::shared_ptr<VulkanShader> CreateShader(const ShaderCreateInfo& shader_info = { });
 };

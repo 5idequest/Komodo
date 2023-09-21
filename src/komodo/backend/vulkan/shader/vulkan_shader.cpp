@@ -8,4 +8,8 @@ VulkanShader::VulkanShader(const ShaderCreateInfo& shader_info) {
   auto spv = LoadShaderModules(shader_info);
 }
 
+void VulkanShader::Bind() {
+
+}
+
 }

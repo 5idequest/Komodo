@@ -7,6 +7,9 @@ namespace Komodo {
 class VulkanShader {
 public:
   VulkanShader(const ShaderCreateInfo& shader_info);
+
+public:
+  void Bind();
 };
 
 }
