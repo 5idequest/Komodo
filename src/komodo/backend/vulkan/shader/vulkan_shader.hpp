@@ -4,9 +4,11 @@
 
 namespace Komodo {
 
+struct VulkanInstanceData;
+
 class VulkanShader {
 public:
-  VulkanShader(const ShaderCreateInfo& shader_info);
+  VulkanShader(VulkanInstanceData* instance, const ShaderCreateInfo& shader_info);
 
 public:
   void Bind();

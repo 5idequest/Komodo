@@ -1,7 +1,7 @@
 #include <komodo/komodo.hpp>
 
 int main() {
-  Komodo::OpenGlInstance komodo;
+  Komodo::VulkanInstance komodo;
   auto window = komodo.CreateWindow();
 
   Komodo::ShaderCreateInfo shader_info;

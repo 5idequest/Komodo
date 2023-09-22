@@ -82,7 +82,7 @@ std::shared_ptr<VulkanWindow> VulkanInstance::CreateWindow(const WindowCreateInf
 }
 
 std::shared_ptr<VulkanShader> VulkanInstance::CreateShader(const ShaderCreateInfo& shader_info) {
-  return std::make_shared<VulkanShader>(shader_info);
+  return std::make_shared<VulkanShader>(instance, shader_info);
 }
 
 }
