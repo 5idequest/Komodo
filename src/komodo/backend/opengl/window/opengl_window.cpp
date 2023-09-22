@@ -11,6 +11,8 @@ OpenGlWindow::OpenGlWindow(const WindowCreateInfo& create_info) {
   glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
 
 #ifdef KOMODO_PLATFORM_MACOS
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
