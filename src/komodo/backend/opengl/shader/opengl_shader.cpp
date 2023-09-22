@@ -13,6 +13,10 @@ namespace Komodo {
 
 static void ApplyOpenGLCompileOptions(spirv_cross::CompilerGLSL* compiler, GLenum shader_type) {
 	spirv_cross::CompilerGLSL::Options options;
+  
+#ifdef KOMODO_PLATFORM_MACOS
+  options.version = 410;
+#endif
 
   // macOS only supports OpenGL versions up to 4.1 due to OpenGL being deprecated on the platform.
   // Unfortunately, explicit binding points are a 4.2 feature. Therefore we have to tell SPIRV-Cross
