@@ -220,7 +220,7 @@ add_subdirectory(example)
 # If project is toplevel, set the example project as startup in Xcode and Visual Studio
 if(PROJECT_IS_TOP_LEVEL)
   if(APPLE)
-    set_target_properties(KomodoExample PROPERTIES XCODE_GENERATE_SCHEME TRUE XCODE_SCHEME_WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    set_target_properties(KomodoExample PROPERTIES XCODE_GENERATE_SCHEME TRUE XCODE_SCHEME_WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/example)
   endif()
   if(WIN32)
     set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT KomodoExample)
