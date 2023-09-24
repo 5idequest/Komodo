@@ -43,7 +43,11 @@ set(KOMODO_SRC_WINDOW_FILES
 source_group("src/komodo/window" FILES ${KOMODO_SRC_WINDOW_FILES})
 
 set(KOMODO_SRC_SHADER_FILES
+  src/komodo/shader/buffer_element.hpp src/komodo/shader/buffer_element.cpp
+  src/komodo/shader/buffer_layout.hpp src/komodo/shader/buffer_layout.cpp
   src/komodo/shader/shader.hpp src/komodo/shader/shader.cpp
+  src/komodo/shader/shader_data_type.hpp src/komodo/shader/shader_data_type.cpp
+  src/komodo/shader/shader_reflection.hpp src/komodo/shader/shader_reflection.cpp
   src/komodo/shader/shader_create_info.hpp
   src/komodo/shader/spv_modules.hpp
 )
