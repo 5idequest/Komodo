@@ -3,6 +3,7 @@
 #include <volk.h>
 
 #include "komodo/shader/shader.hpp"
+#include "komodo/shader/shader_reflection.hpp"
 #include "komodo/backend/vulkan/debug/vulkan_call.hpp"
 #include "komodo/backend/vulkan/instance/vulkan_instance_data.hpp"
 
@@ -29,6 +30,7 @@ static VkPipelineShaderStageCreateInfo CreateShaderStageCreateInfo(VkShaderModul
 
 VulkanShader::VulkanShader(VulkanInstanceData* instance, const ShaderCreateInfo& shader_info) {
   auto spv = LoadShaderModules(shader_info);
+  auto reflection = ShaderReflectionDetails(spv);
   
   std::vector<VkShaderModule> shader_modules;
   std::vector<VkPipelineShaderStageCreateInfo> shader_stages;

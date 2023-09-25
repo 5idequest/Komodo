@@ -8,6 +8,7 @@
 
 #include "komodo/debug/assert.hpp"
 #include "komodo/shader/shader.hpp"
+#include "komodo/shader/shader_reflection.hpp"
 
 namespace Komodo {
 
@@ -70,10 +71,11 @@ static GLuint CreateShaderModule(std::shared_ptr<std::vector<uint32_t>> spv, GLe
 
 
 OpenGlShader::OpenGlShader(const ShaderCreateInfo& shader_info) {
-  shader_program = glCreateProgram();
-
   auto spv = LoadShaderModules(shader_info);
+  auto reflection = ShaderReflectionDetails(spv);
 
+  shader_program = glCreateProgram();
+  
   std::vector<unsigned int> shader_modules;
 
   if (spv->vert) {
