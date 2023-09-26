@@ -120,6 +120,7 @@ if(KOMODO_BACKEND_VULKAN)
 
   set(KOMODO_SRC_VULKAN_SHADER_FILES
     src/komodo/backend/vulkan/shader/vulkan_shader.hpp src/komodo/backend/vulkan/shader/vulkan_shader.cpp
+    src/komodo/backend/vulkan/shader/vulkan_shader_data.hpp
   )
   source_group("src/backend/vulkan/shader" FILES ${KOMODO_SRC_VULKAN_SHADER_FILES})
 endif()
